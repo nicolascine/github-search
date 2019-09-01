@@ -3,7 +3,7 @@ import { SearchInput } from "../../common";
 
 const Results: React.FC = () => {
   return (
-    <div style={{ maxWidth: "650px", padding: "1em" }}>
+    <div className="layout" style={{ maxWidth: "750px", padding: "1em" }}>
       <SearchInput />
     </div>
   );
