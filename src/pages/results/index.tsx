@@ -1,10 +1,10 @@
 import React from "react";
-import { SearchInput } from "../../common";
+import { Input } from "../../common";
 
 const Results: React.FC = () => {
   return (
     <div className="layout" style={{ maxWidth: "750px", padding: "1em" }}>
-      <SearchInput />
+      <Input />
     </div>
   );
 };

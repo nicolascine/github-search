@@ -1,14 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "./Button";
-const SearchInputWrapper = styled.div`
+
+const InputWrapper = styled.div`
   display: flex;
   -webkit-box-shadow: 0px 0px 1px 1px rgba(204, 204, 204, 1);
   -moz-box-shadow: 0px 0px 1px 1px rgba(204, 204, 204, 1);
   box-shadow: 0px 0px 1px 1px rgba(204, 204, 204, 1);
   border-radius: 0px 2px 2px 0px;
+  width: 100%;
   & > input {
-    width: 650px;
+    width: 100%;
     height: 50px;
     color: #5c5c5c;
     font-size: 20px;
@@ -29,15 +31,15 @@ const SearchInputWrapper = styled.div`
   }
 `;
 
-const SearchInput: React.FC = () => {
+const Input: React.FC = () => {
   return (
-    <SearchInputWrapper>
+    <InputWrapper>
       <input className="search__input" type="text" />
       <div className="button__container">
         <Button />
       </div>
-    </SearchInputWrapper>
+    </InputWrapper>
   );
 };
 
-export default SearchInput;
+export default Input;
