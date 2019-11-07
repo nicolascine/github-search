@@ -1,4 +1,58 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Github search, modern webapp
+
+### Challenge: create an app that allow make searchs using the Github API, collect and display data from users and show info with links to their repositories.
+
+Stack: Typescript, React, GraphQL and Redux. Tests are maked with Jest and Istambul for code coverage
+
+```
+Bonnus 1, new features:
+
+This project adds two features to the original requirement:
+
+- Themes (change css theme on demand)
+- Multilingual support (ES | EN | BR)
+
+Bonnus 2, good practices:
+
+- Use Eslint (js/tsx code linter)
+- Prettier (code formating) with an Pre-Commit hook (git)
+```
+
+## Project structue
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), and the main structure is proposed by this boilerplate, also, as an component strategy use "atomic design pattern" where the main goal is divide into differents component as is posible, finding a balance between coupling and cohesion.
+
+```
+├── App.test.tsx
+├── App.tsx
+├── assets
+├── common
+│   ├── Logo
+│   │   └── index.tsx
+│   ├── Search
+│   │   ├── Button.tsx
+│   │   ├── Input.tsx
+│   └── index.tsx
+├── config.tsx
+├── index.tsx
+├── pages
+│   ├── home
+│   └── results
+│       ├── components
+│       │   ├── Avatar.tsx
+│       │   ├── Info.tsx
+│       │   ├── Result.tsx
+│       │   ├── Sidebar.tsx
+│       │   └── index.tsx
+│       └── index.tsx
+├── react-app-env.d.ts
+├── serviceWorker.ts
+└── styles
+    ├── index.scss
+    └── variables.scss
+```
+
+each component folder contains a directory called `__tests__` where test files are located with .test.tsx suffix.
 
 ## Available Scripts
 
@@ -37,8 +91,9 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Conventions
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Semantic Commit version
+- Semantic versioning
+- Gitflow as a git strategy
+- Changelog .... blablabla
