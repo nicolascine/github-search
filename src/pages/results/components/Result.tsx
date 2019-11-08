@@ -12,6 +12,9 @@ const Item = styled.div`
   .title {
     font-size: 2.188em;
     font-weight: 400;
+    @media (max-width: 768px) {
+      font-size: 1.8em;
+    }
     a {
       color: #ac53f2;
       text-decoration: none;
@@ -31,17 +34,27 @@ const Item = styled.div`
   }
 `;
 
-const Result: React.FC = () => {
+const Result: React.FC<{
+  title: string;
+  description: string;
+  link: string;
+  starCount: string;
+}> = props => {
   return (
     <Item>
       <div className="title">
-        <a href="http://google.com" target="_blank" rel="noopener noreferrer">
-          How to kill Obi-Wan
+        <a
+          title={props.title}
+          href={props.link}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {props.title}
         </a>
       </div>
-      <div className="description">I need more suggestions</div>
+      <div className="description">{props.description}</div>
       <div className="stars">
-        <img src={star} width="24" height="24" alt="stars" /> 44
+        <img src={star} width="24" height="24" alt="stars" /> {props.starCount}
       </div>
     </Item>
   );

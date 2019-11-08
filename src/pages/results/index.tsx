@@ -9,6 +9,9 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   padding: 2em;
+  @media (max-width: 768px) {
+    padding: 0px;
+  }
   .row {
     display: flex;
     flex-direction: row;
@@ -28,7 +31,7 @@ const Container = styled.div`
       max-width: 300px;
       @media (max-width: 768px) {
         margin: 0 auto 2em auto;
-        max-width: 80%;
+        max-width: 85%;
       }
     }
     &.content {
@@ -36,7 +39,7 @@ const Container = styled.div`
       padding-left: 50px;
       @media (max-width: 768px) {
         padding-left: 0px;
-        max-width: 80%;
+        max-width: 85%;
         margin: 0 auto 2em auto;
       }
     }
@@ -76,15 +79,12 @@ const Results: React.FC = () => {
             />
           </div>
           <div className="column content">
-            <Result />
-            <Result />
-            <Result />
-            <Result />
-            <Result />
-            <Result />
-            <Result />
-            <Result />
-            <Result />
+            <Result
+              title={"this is a repo!"}
+              description={"this is a description!"}
+              link={"http://google.com"}
+              starCount={"35.000"}
+            />
           </div>
         </div>
       </Container>
