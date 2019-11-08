@@ -1,12 +1,9 @@
 import React from "react";
-import styled from "styled-components";
 import { Avatar, Info } from "./index";
-
-const SidebarWrapper = styled.div``;
 
 const Sidebar: React.FC = () => {
   return (
-    <SidebarWrapper>
+    <>
       <Avatar
         userName="Dan Abramov"
         imgURL="https://avatars1.githubusercontent.com/u/810438?s=460&v=4"
@@ -26,7 +23,7 @@ const Sidebar: React.FC = () => {
         content="99.999.999"
         className="followersCount"
       />
-    </SidebarWrapper>
+    </>
   );
 };
 

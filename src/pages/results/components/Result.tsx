@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import star from "../../../assets/icons/star.svg";
 
-const ResultItem = styled.div`
+const Item = styled.div`
   margin-bottom: 1.5em;
   .title,
   .description,
@@ -33,7 +33,7 @@ const ResultItem = styled.div`
 
 const Result: React.FC = () => {
   return (
-    <ResultItem>
+    <Item>
       <div className="title">
         <a href="http://google.com" target="_blank" rel="noopener noreferrer">
           How to kill Obi-Wan
@@ -43,7 +43,7 @@ const Result: React.FC = () => {
       <div className="stars">
         <img src={star} width="24" height="24" alt="stars" /> 44
       </div>
-    </ResultItem>
+    </Item>
   );
 };
 

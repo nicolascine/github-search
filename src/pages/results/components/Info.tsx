@@ -7,7 +7,7 @@ import repo from "../../../assets/icons/repo.svg";
 import search from "../../../assets/icons/search.svg";
 import star from "../../../assets/icons/star.svg";
 
-const ItemWrapper = styled.div`
+const Wrapper = styled.div`
   width: 100%;
   display: block;
   font-size: 20px;
@@ -40,7 +40,7 @@ const Info: React.FC<{
   className: string;
 }> = props => {
   return (
-    <ItemWrapper className={props.className}>
+    <Wrapper className={props.className}>
       {props.iconName && (
         <img
           width="24"
@@ -50,7 +50,7 @@ const Info: React.FC<{
         />
       )}
       <span>{props.content}</span>
-    </ItemWrapper>
+    </Wrapper>
   );
 };
 
