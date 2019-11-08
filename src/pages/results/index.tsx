@@ -9,7 +9,6 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   padding: 2em;
-
   .row {
     display: flex;
     flex-direction: row;
@@ -17,12 +16,30 @@ const Container = styled.div`
     width: 100%;
     max-width: 1152px;
   }
-
   .column {
     display: flex;
     flex-direction: column;
     flex-basis: 100%;
     flex: 1;
+    @media (max-width: 768px) {
+      flex: auto;
+    }
+    &.sidebar {
+      max-width: 300px;
+      @media (max-width: 768px) {
+        margin: 0 auto 2em auto;
+        max-width: 80%;
+      }
+    }
+    &.content {
+      max-width: 750px;
+      padding-left: 50px;
+      @media (max-width: 768px) {
+        padding-left: 0px;
+        max-width: 80%;
+        margin: 0 auto 2em auto;
+      }
+    }
   }
 `;
 
@@ -31,18 +48,12 @@ const Results: React.FC = () => {
     <>
       <Container>
         <div className="row">
-          <div
-            className="column"
-            style={{ maxWidth: "300px", fontSize: "11px" }}
-          >
+          <div className="column sidebar" style={{ fontSize: "11px" }}>
             <Link to={"/"} style={{ textDecoration: "none" }}>
               <Logo />
             </Link>
           </div>
-          <div
-            className="column"
-            style={{ maxWidth: "750px", paddingLeft: "50px" }}
-          >
+          <div className="column content">
             <Input />
           </div>
         </div>
@@ -50,13 +61,10 @@ const Results: React.FC = () => {
 
       <Container>
         <div className="row">
-          <div className="column" style={{ maxWidth: "300px" }}>
+          <div className="column sidebar">
             <Sidebar />
           </div>
-          <div
-            className="column"
-            style={{ maxWidth: "750px", paddingLeft: "50px" }}
-          >
+          <div className="column content">
             <Result />
             <Result />
             <Result />

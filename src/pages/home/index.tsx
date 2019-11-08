@@ -11,6 +11,14 @@ const SearchContainer = styled.div`
     max-width: 750px;
     width: 100%;
     height: 100px;
+    @media (max-width: 375px) {
+      max-width: 80%;
+      font-size: 10px;
+    }
+    @media (max-width: 768px) {
+      max-width: 90%;
+      font-size: 10px;
+    }
   }
 `;
 
