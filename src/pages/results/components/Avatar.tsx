@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const AvatarWrapper = styled.div`
+const Wrapper = styled.div`
   img {
     width: 100%;
     max-width: 100%;
@@ -12,9 +12,9 @@ const AvatarWrapper = styled.div`
 
 const Avatar: React.FC<{ imgURL: string; userName: string }> = props => {
   return (
-    <AvatarWrapper>
+    <Wrapper>
       <img src={props.imgURL} alt={props.userName} />
-    </AvatarWrapper>
+    </Wrapper>
   );
 };
 

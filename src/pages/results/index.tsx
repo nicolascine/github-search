@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Sidebar, Result } from "./components";
 import { Logo, Input } from "../../common";
+import NotFound from "./NotFound";
+import ResultList from "./ResultList";
 
 const Container = styled.div`
   display: flex;
@@ -64,28 +65,29 @@ const Results: React.FC = () => {
 
       <Container>
         <div className="row">
-          <div className="column sidebar">
-            <Sidebar
-              userName={"Nicolás Silva"}
-              userLogin={"nicolascine"}
-              imgUrl={
-                "https://avatars0.githubusercontent.com/u/2984968?s=460&v=4"
+          <ResultList
+            userInfo={{
+              userName: "string",
+              userLogin: "string",
+              imgUrl:
+                "https://avatars0.githubusercontent.com/u/2984968?s=460&v=4",
+              organization: "string",
+              location: "string",
+              star: "string",
+              repo: "string",
+              followers: "string"
+            }}
+            results={[
+              {
+                title: "string",
+                description: "string",
+                link: "string",
+                starCount: "string"
               }
-              organization={"internet.com"}
-              location={"Chile"}
-              star={"2000"}
-              repo={"11.1111.111"}
-              followers={"45"}
-            />
-          </div>
-          <div className="column content">
-            <Result
-              title={"this is a repo!"}
-              description={"this is a description!"}
-              link={"http://google.com"}
-              starCount={"35.000"}
-            />
-          </div>
+            ]}
+          />
+
+          {/* <NotFound /> */}
         </div>
       </Container>
     </>
