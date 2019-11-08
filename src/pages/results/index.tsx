@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { Sidebar, Result } from "./components";
 import { Logo, Input } from "../../common";
 
@@ -30,8 +31,13 @@ const Results: React.FC = () => {
     <>
       <Container>
         <div className="row">
-          <div className="column" style={{ maxWidth: "300px" }}>
-            <Logo />
+          <div
+            className="column"
+            style={{ maxWidth: "300px", fontSize: "11px" }}
+          >
+            <Link to={"/"} style={{ textDecoration: "none" }}>
+              <Logo />
+            </Link>
           </div>
           <div
             className="column"
