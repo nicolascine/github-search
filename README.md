@@ -13,6 +13,7 @@ This project adds two features to the original requirement:
 - Themes (change css theme on demand)
 - Multilingual support (ES | EN | BR)
 - Fully responsive, without frameworks (using flexbox css)
+- Apply guides for accesibility (WAI-ARIA standard)
 - [Progresive web app](https://developers.google.com/web/progressive-web-apps)
 
 Good practices:
