@@ -1,26 +1,29 @@
-# Github search, modern webapp
+# Github search, modern web app
 
-### Challenge: create an app that allow make searchs using the Github API, collect and display data from users and show info with links to their repositories.
+### Challenge: create an app that allows making searches using the Github API, collect and display data from users and show info with links to their repositories.
 
-Stack: Typescript, React, GraphQL and Redux. Tests are maked with Jest and Istambul for code coverage
+Stack: Typescript, React, GraphQL and Redux. Tests are made with Jest and Istambul for code coverage
 
-```
-Bonnus 1, new features:
+### Bonnus
+
+New features:
 
 This project adds two features to the original requirement:
 
 - Themes (change css theme on demand)
 - Multilingual support (ES | EN | BR)
+- Fully responsive, without frameworks (using flexbox css)
+- [Progresive web app](https://developers.google.com/web/progressive-web-apps)
 
-Bonnus 2, good practices:
+Good practices:
 
-- Use Eslint (js/tsx code linter)
-- Prettier (code formating) with an Pre-Commit hook (git)
-```
+- Use Eslint (code linter with support for Typescript)
+- Prettier (code formatting) with a Pre-Commit hook (git)
+- [Semantic Commit Messages](https://www.conventionalcommits.org/en/v1.0.0/)
 
-## Project structue
+## Project structure
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), and the main structure is proposed by this boilerplate, also, as an component strategy use "atomic design pattern" where the main goal is divide into differents component as is posible, finding a balance between coupling and cohesion.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), and the main structure is proposed by this boilerplate, also, as a component strategy use "atomic design pattern" where the main goal is divide into differents component as is possible, finding a balance between coupling and cohesion.
 
 ```
 ├── App.test.tsx
@@ -81,19 +84,9 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
 ## Conventions
 
-- Semantic Commit version
+- Semantic Commit Messages
 - Semantic versioning
-- Gitflow as a git strategy
+- Gitflow, as a git strategy
 - Changelog .... blablabla
