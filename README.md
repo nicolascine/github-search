@@ -8,9 +8,9 @@ Stack: Typescript, React, GraphQL and Redux. Tests are made with Jest and Istamb
 
 New features:
 
-This project adds two features to the original requirement:
+This project adds some features to the original requirement:
 
-- Themes (change css theme on demand)
+- Themes (change css theme on demand through UI option)
 - Multilingual support (ES | EN | BR)
 - Fully responsive, without frameworks (using flexbox css)
 - Apply guides for accesibility (WAI-ARIA standard)
@@ -56,9 +56,17 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
     └── variables.scss
 ```
 
-each component folder contains a directory called `__tests__` where test files are located with .test.tsx suffix.
+Each component folder contains a directory called `__tests__` where test files are located with .test.tsx suffix.
 
-## Available Scripts
+## Installation
+
+In the project directory, run:
+
+### `npm install`
+
+this command will install all needed project dependencies
+
+## Available commands (after installation)
 
 In the project directory, you can run:
 
@@ -83,11 +91,9 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
 ## Conventions
 
 - Semantic Commit Messages
 - Semantic versioning
 - Gitflow, as a git strategy
-- Changelog .... blablabla
+- Changelog
