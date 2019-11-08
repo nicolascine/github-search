@@ -34,8 +34,9 @@ const ResultList: React.FC<{
         />
       </div>
       <div className="column content">
-        {props.results.map(item => (
+        {props.results.map((item, index) => (
           <Result
+            key={index}
             title={item.title}
             description={item.description}
             link={item.link}
