@@ -1,26 +1,38 @@
 import React from "react";
 import { Avatar, Info } from "./index";
 
-const Sidebar: React.FC = () => {
+type userInfo = {
+  userName: string;
+  userLogin: string;
+  imgUrl: string;
+  organization: string;
+  location: string;
+  star: string;
+  repo: string;
+  followers: string;
+};
+
+const Sidebar: React.FC<userInfo> = props => {
   return (
     <>
-      <Avatar
-        userName="Dan Abramov"
-        imgURL="https://avatars1.githubusercontent.com/u/810438?s=460&v=4"
-      />
-      <Info content="Darth vader ~" className="userName" />
-      <Info content="anakinskywalker" className="userLogin" />
+      <Avatar userName={props.userName} imgURL={props.imgUrl} />
+      <Info content={props.userName} className="userName" />
+      <Info content={props.userLogin} className="userLogin" />
       <Info
+        content={props.organization}
         iconName="organization"
-        content="The galactic empire"
         className="organization"
       />
-      <Info iconName="location" content="Tatooine" className="location" />
-      <Info iconName="star" content="1.000.000" className="startCount" />
-      <Info iconName="repo" content="4" className="repositoriesCount" />
+      <Info iconName="location" content={props.location} className="location" />
+      <Info iconName="star" content={props.star} className="startCount" />
       <Info
+        iconName="repo"
+        content={props.repo}
+        className="repositoriesCount"
+      />
+      <Info
+        content={props.followers}
         iconName="followers"
-        content="99.999.999"
         className="followersCount"
       />
     </>

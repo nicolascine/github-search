@@ -62,7 +62,18 @@ const Results: React.FC = () => {
       <Container>
         <div className="row">
           <div className="column sidebar">
-            <Sidebar />
+            <Sidebar
+              userName={"Nicolás Silva"}
+              userLogin={"nicolascine"}
+              imgUrl={
+                "https://avatars0.githubusercontent.com/u/2984968?s=460&v=4"
+              }
+              organization={"internet.com"}
+              location={"Chile"}
+              star={"2000"}
+              repo={"11.1111.111"}
+              followers={"45"}
+            />
           </div>
           <div className="column content">
             <Result />
