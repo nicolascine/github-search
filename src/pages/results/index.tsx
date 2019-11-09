@@ -67,8 +67,8 @@ const Results: React.FC = () => {
         <div className="row">
           <ResultList
             userInfo={{
-              userName: "string",
-              userLogin: "string",
+              userName: "Nicolás Silva",
+              userLogin: "@nicolascine",
               imgUrl:
                 "https://avatars0.githubusercontent.com/u/2984968?s=460&v=4",
               organization: "string",
@@ -79,10 +79,70 @@ const Results: React.FC = () => {
             }}
             results={[
               {
-                title: "string",
-                description: "string",
-                link: "string",
-                starCount: "string"
+                title: "scrap-state-machine",
+                description: "scrapper made with nodejs",
+                link: "http://google.com",
+                starCount: "50.000"
+              },
+              {
+                title: "scrap-state-machine",
+                description: "scrapper made with nodejs",
+                link: "http://google.com",
+                starCount: "50.000"
+              },
+              {
+                title: "scrap-state-machine",
+                description: "scrapper made with nodejs",
+                link: "http://google.com",
+                starCount: "50.000"
+              },
+              {
+                title: "scrap-state-machine",
+                description: "scrapper made with nodejs",
+                link: "http://google.com",
+                starCount: "50.000"
+              },
+              {
+                title: "scrap-state-machine",
+                description: "scrapper made with nodejs",
+                link: "http://google.com",
+                starCount: "50.000"
+              },
+              {
+                title: "scrap-state-machine",
+                description: "scrapper made with nodejs",
+                link: "http://google.com",
+                starCount: "50.000"
+              },
+              {
+                title: "scrap-state-machine",
+                description: "scrapper made with nodejs",
+                link: "http://google.com",
+                starCount: "50.000"
+              },
+              {
+                title: "scrap-state-machine",
+                description: "scrapper made with nodejs",
+                link: "http://google.com",
+                starCount: "50.000"
+              },
+              {
+                title: "scrap-state-machine",
+                description: "scrapper made with nodejs",
+                link: "http://google.com",
+                starCount: "50.000"
+              },
+              {
+                title: "scrap-state-machine",
+                description: "scrapper made with nodejs",
+                link: "http://google.com",
+                starCount: "50.000"
+              },
+              {
+                title: "scrap-state-machine",
+                description: "scrapper made with nodejs",
+                link: "http://google.com",
+                starCount: "50.000"
               }
             ]}
           />

@@ -10,13 +10,15 @@ New features:
 
 This project adds some features to the original requirement:
 
-- Themes (change css theme on demand through UI option)
+- Dynamic Themes (change css theme on demand through UI option) using native css variables
+- Add animations, page transitions and elements
 - Multilingual support (ES | EN | BR)
-- Fully responsive, without frameworks (using flexbox css)
+- Fully responsive, without frameworks (using native flexbox css)
 - Apply guides for accesibility (WAI-ARIA standard)
 - [Progresive web app](https://developers.google.com/web/progressive-web-apps)
+- Persist settings on localStorage
 
-Good practices:
+Good practices
 
 - Use Eslint (code linter with support for Typescript)
 - Prettier (code formatting) with a Pre-Commit hook (git)

@@ -16,7 +16,7 @@ const Item = styled.div`
       font-size: 1.8em;
     }
     a {
-      color: #ac53f2;
+      color: var(--primaryTextColor);
       text-decoration: none;
     }
   }

@@ -1,6 +1,37 @@
 @import-normalize;
 @import url("https://fonts.googleapis.com/css?family=Raleway:200i,300,400&display=swap");
 
+// main colors
+// $purple: #ac53f2;
+// $green: #09c62a;
+// $orange: #c66b09;
+// $brownish-grey: #5c5c5c;
+
+// default theme(light)
+html {
+  --primaryBackground: #ffffff;
+  --primaryTextColor: #000000;
+  background-color: var(--primaryBackground);
+  // color: var(--primaryTextColor);
+}
+
+// dark theme
+html[data-theme="light-purple"] {
+  --primaryBackground: #ffffff;
+  --primaryTextColor: #ac53f2;
+  --primaryButtonColor: #ac53f2;
+}
+html[data-theme="light-green"] {
+  --primaryBackground: #ffffff;
+  --primaryTextColor: #09c62a;
+  --primaryButtonColor: #09c62a;
+}
+html[data-theme="light-orange"] {
+  --primaryBackground: #ffffff;
+  --primaryTextColor: #c66b09;
+  --primaryButtonColor: #c66b09;
+}
+
 body {
   margin: 0;
   font-family: "Raleway", sans-serif;

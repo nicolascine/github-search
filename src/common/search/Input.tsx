@@ -4,8 +4,6 @@ import Button from "./Button";
 
 const InputWrapper = styled.div`
   display: flex;
-  -webkit-box-shadow: 0px 0px 1px 1px rgba(204, 204, 204, 1);
-  -moz-box-shadow: 0px 0px 1px 1px rgba(204, 204, 204, 1);
   box-shadow: 0px 0px 1px 1px rgba(204, 204, 204, 1);
   border-radius: 0px 2px 2px 0px;
   width: 100%;
@@ -27,7 +25,7 @@ const InputWrapper = styled.div`
     width: 100px;
     height: 50px;
     border-radius: 0px 2px 2px 0px;
-    background-color: #ac53f2;
+    background-color: var(--primaryButtonColor);
   }
 `;
 
