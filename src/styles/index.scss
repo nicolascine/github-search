@@ -20,16 +20,19 @@ html[data-theme="light-purple"] {
   --primaryBackground: #ffffff;
   --primaryTextColor: #ac53f2;
   --primaryButtonColor: #ac53f2;
+  --primaryLoadingColor: #ac53f2;
 }
 html[data-theme="light-green"] {
   --primaryBackground: #ffffff;
   --primaryTextColor: #09c62a;
   --primaryButtonColor: #09c62a;
+  --primaryLoadingColor: #09c62a;
 }
 html[data-theme="light-orange"] {
   --primaryBackground: #ffffff;
   --primaryTextColor: #c66b09;
   --primaryButtonColor: #c66b09;
+  --primaryLoadingColor: #c66b09;
 }
 
 body {

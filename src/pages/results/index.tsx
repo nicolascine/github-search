@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Logo, Input } from "../../common";
+import { Logo, Input, Loading } from "../../common";
 import NotFound from "./NotFound";
 import ResultList from "./ResultList";
 
@@ -65,7 +65,8 @@ const Results: React.FC = () => {
 
       <Container>
         <div className="row">
-          <ResultList
+          {/* <Loading /> */}
+          {/* <ResultList
             userInfo={{
               userName: "Nicolás Silva",
               userLogin: "@nicolascine",
@@ -145,9 +146,9 @@ const Results: React.FC = () => {
                 starCount: "50.000"
               }
             ]}
-          />
+          /> */}
 
-          {/* <NotFound /> */}
+          <NotFound />
         </div>
       </Container>
     </>
