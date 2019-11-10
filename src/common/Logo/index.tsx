@@ -5,7 +5,7 @@ const LogoWrapper = styled.div`
   font-size: 3.75em;
   font-weight: 400;
   font-family: Monaco, sans-serif;
-  color: black;
+  color: var(--primaryTitles);
   text-align: center;
   max-width: 100%;
   span {

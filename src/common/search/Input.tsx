@@ -25,7 +25,7 @@ const InputWrapper = styled.div`
     width: 100px;
     height: 50px;
     border-radius: 0px 2px 2px 0px;
-    background-color: var(--primaryButtonColor);
+    background-color: var(--primaryColor);
   }
 `;
 

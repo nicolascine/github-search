@@ -66,7 +66,7 @@ const Results: React.FC = () => {
       <Container>
         <div className="row">
           {/* <Loading /> */}
-          {/* <ResultList
+          <ResultList
             userInfo={{
               userName: "Nicolás Silva",
               userLogin: "@nicolascine",
@@ -146,9 +146,9 @@ const Results: React.FC = () => {
                 starCount: "50.000"
               }
             ]}
-          /> */}
+          />
 
-          <NotFound />
+          {/* <NotFound /> */}
         </div>
       </Container>
     </>

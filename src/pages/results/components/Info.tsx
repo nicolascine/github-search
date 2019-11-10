@@ -13,15 +13,22 @@ const Wrapper = styled.div`
   font-size: 20px;
   padding: 0.2em 0;
   font-family: "Raleway", sans-serif;
+  color: var(--secondaryColor);
   img {
     float: left;
     padding-right: 0.5em;
   }
   &.userName {
     font-size: 35px;
+    span {
+      color: var(--primaryTitles);
+    }
   }
   &.userLogin {
     margin-bottom: 1.5em;
+    span {
+      color: var(--secondaryColor);
+    }
   }
 `;
 

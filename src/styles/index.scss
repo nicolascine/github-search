@@ -1,38 +1,40 @@
 @import-normalize;
 @import url("https://fonts.googleapis.com/css?family=Raleway:200i,300,400&display=swap");
 
-// main colors
-// $purple: #ac53f2;
-// $green: #09c62a;
-// $orange: #c66b09;
-// $brownish-grey: #5c5c5c;
-
-// default theme(light)
 html {
   --primaryBackground: #ffffff;
-  --primaryTextColor: #000000;
+  --primaryColor: #000000;
   background-color: var(--primaryBackground);
-  // color: var(--primaryTextColor);
 }
 
-// dark theme
-html[data-theme="light-purple"] {
-  --primaryBackground: #ffffff;
-  --primaryTextColor: #ac53f2;
-  --primaryButtonColor: #ac53f2;
-  --primaryLoadingColor: #ac53f2;
-}
-html[data-theme="light-green"] {
-  --primaryBackground: #ffffff;
-  --primaryTextColor: #09c62a;
-  --primaryButtonColor: #09c62a;
-  --primaryLoadingColor: #09c62a;
-}
-html[data-theme="light-orange"] {
-  --primaryBackground: #ffffff;
-  --primaryTextColor: #c66b09;
-  --primaryButtonColor: #c66b09;
-  --primaryLoadingColor: #c66b09;
+html {
+  &[data-theme="light-purple"] {
+    --primaryBackground: #ffffff;
+    --primaryColor: #ac53f2;
+    --primaryTitles: #000;
+    --secondaryColor: #000;
+  }
+
+  &[data-theme="light-green"] {
+    --primaryBackground: #ffffff;
+    --primaryColor: #09c62a;
+    --primaryTitles: #000;
+    --secondaryColor: #000;
+  }
+
+  &[data-theme="dark-purple"] {
+    --primaryBackground: #000;
+    --primaryColor: #ac53f2;
+    --primaryTitles: #ac53f2;
+    --secondaryColor: #efefefd1;
+  }
+
+  &[data-theme="dark-green"] {
+    --primaryBackground: #000;
+    --primaryColor: #09c62a;
+    --primaryTitles: #09c62a;
+    --secondaryColor: #efefefd1;
+  }
 }
 
 body {

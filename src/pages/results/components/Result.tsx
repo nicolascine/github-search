@@ -16,17 +16,20 @@ const Item = styled.div`
       font-size: 1.8em;
     }
     a {
-      color: var(--primaryTextColor);
+      color: var(--primaryColor);
       text-decoration: none;
     }
   }
   .description {
     font-size: 1.25em;
     font-weight: 300;
+    color: var(--secondaryColor);
   }
   .stars {
     font-size: 1.25em;
     font-weight: 300;
+    color: var(--secondaryColor);
+
     img {
       float: left;
       padding-right: 0.5em;
