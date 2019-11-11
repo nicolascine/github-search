@@ -35,6 +35,19 @@ const SettingsPanel = styled.div`
   }
   .content {
     padding: 0.5em;
+    .colorContainer {
+      border: 1px solid #eee;
+      height: 25px;
+      cursor: pointer;
+      width: 45%;
+      display: inline-block;
+      margin-right: 5px;
+    }
+    .colorItem {
+      height: 25px;
+      width: 50%;
+      display: inline-block;
+    }
   }
 `;
 
@@ -94,35 +107,23 @@ const Layout: React.FC = props => {
                   (theme: string, index: number) => (
                     <div
                       key={index}
-                      style={{
-                        border: "1px solid #eee",
-                        height: "25px",
-                        cursor: "pointer",
-                        width: "45%",
-                        display: "inline-block",
-                        marginRight: "5px"
-                      }}
+                      className="colorContainer"
                       onClick={(e: React.SyntheticEvent) =>
                         setCurrentTheme(config.themes[theme].name)
                       }
                     >
                       <div
+                        className="colorItem"
                         style={{
-                          height: "25px",
-                          width: "50%",
-                          display: "inline-block",
                           backgroundColor: `${config.themes[theme].background}`
                         }}
                       ></div>
                       <div
+                        className="colorItem"
                         style={{
-                          height: "25px",
-                          width: "50%",
-                          display: "inline-block",
                           backgroundColor: `${config.themes[theme].color}`
                         }}
                       ></div>
-                      {/* {config.themes[theme].name} */}
                     </div>
                   )
                 )}
