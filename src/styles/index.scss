@@ -13,6 +13,8 @@ html {
     --primaryColor: #ac53f2;
     --primaryTitles: #000;
     --secondaryColor: #000;
+    --invertedPercentOnDark: 100;
+    --invertedPercentOnLight: 0;
   }
 
   &[data-theme="light-green"] {
@@ -20,6 +22,8 @@ html {
     --primaryColor: #09c62a;
     --primaryTitles: #000;
     --secondaryColor: #000;
+    --invertedPercentOnDark: 100;
+    --invertedPercentOnLight: 0;
   }
 
   &[data-theme="dark-purple"] {
@@ -27,6 +31,8 @@ html {
     --primaryColor: #ac53f2;
     --primaryTitles: #ac53f2;
     --secondaryColor: #efefefd1;
+    --invertedPercentOnDark: 0;
+    --invertedPercentOnLight: 100;
   }
 
   &[data-theme="dark-green"] {
@@ -34,6 +40,8 @@ html {
     --primaryColor: #09c62a;
     --primaryTitles: #09c62a;
     --secondaryColor: #efefefd1;
+    --invertedPercentOnDark: 0;
+    --invertedPercentOnLight: 100;
   }
 }
 

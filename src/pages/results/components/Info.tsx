@@ -30,6 +30,12 @@ const Wrapper = styled.div`
       color: var(--secondaryColor);
     }
   }
+  &.followersCount {
+    img {
+      -webkit-filter: invert(var(--invertedPercentOnDark));
+      filter: invert(var(--invertedPercentOnDark));
+    }
+  }
 `;
 
 const icons: { [key: string]: any } = {

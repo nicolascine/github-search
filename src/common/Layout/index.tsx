@@ -12,11 +12,17 @@ const SettingsPanel = styled.div`
   border-radius: 1em 0 0 1em;
   width: 50px;
   height: 50px;
+  h5,
+  p {
+    color: var(--secondaryColor);
+  }
   img {
     display: block;
     margin-top: 12px;
     margin-left: 15px;
     cursor: pointer;
+    -webkit-filter: invert(var(--invertedPercentOnLight));
+    filter: invert(var(--invertedPercentOnLight));
   }
   .frame {
     box-shadow: 0px 0px 1px 1px rgba(204, 204, 204, 1);
