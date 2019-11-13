@@ -9,28 +9,27 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2em;
-  @media (max-width: 768px) {
-    padding: 0px;
-  }
+  padding-top: 2em;
+
   .row {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
     max-width: 1152px;
+    padding: 0 2em;
   }
   .column {
     display: flex;
     flex-direction: column;
     flex-basis: 100%;
     flex: 1;
-    @media (max-width: 768px) {
+    @media (max-width: 769px) {
       flex: auto;
     }
     &.sidebar {
       max-width: 300px;
-      @media (max-width: 768px) {
+      @media (max-width: 769px) {
         margin: 0 auto 2em auto;
         max-width: 85%;
       }
@@ -38,7 +37,7 @@ const Container = styled.div`
     &.content {
       max-width: 750px;
       padding-left: 50px;
-      @media (max-width: 768px) {
+      @media (max-width: 769px) {
         padding-left: 0px;
         max-width: 85%;
         margin: 0 auto 2em auto;

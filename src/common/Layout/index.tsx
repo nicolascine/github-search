@@ -8,23 +8,32 @@ const SettingsPanel = styled.div`
   position: fixed;
   top: 2em;
   right: 0px;
+  background: white;
   box-shadow: 0px 0px 1px 1px rgba(204, 204, 204, 1);
   border-radius: 1em 0 0 1em;
   width: 50px;
   height: 50px;
-  h5,
-  p {
-    color: var(--secondaryColor);
+  @media (max-width: 375px) {
+    top: 2.5em;
+    width: 35px;
+    height: 35px;
   }
   img {
     display: block;
     margin-top: 12px;
     margin-left: 15px;
     cursor: pointer;
-    -webkit-filter: invert(var(--invertedPercentOnLight));
-    filter: invert(var(--invertedPercentOnLight));
+    width: 25px;
+    height: 25px;
+    @media (max-width: 375px) {
+      width: 16px;
+      height: 16px;
+      margin-top: 9px;
+      margin-left: 13px;
+    }
   }
   .frame {
+    background-color: white;
     box-shadow: 0px 0px 1px 1px rgba(204, 204, 204, 1);
     border-radius: 1em 0 0 1em;
     width: 200px;
@@ -52,7 +61,7 @@ const SettingsPanel = styled.div`
 `;
 
 const Layout: React.FC = props => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   const [currentTheme, setCurrentTheme] = useState(
     config.themes[config.defaultTheme].name
@@ -86,8 +95,6 @@ const Layout: React.FC = props => {
         <SettingsPanel ref={settingsRef}>
           <img
             src={SettingsLogo}
-            width="25"
-            height="25"
             alt="settings"
             onClick={(e: React.SyntheticEvent) => setIsVisible(!isVisible)}
           />
