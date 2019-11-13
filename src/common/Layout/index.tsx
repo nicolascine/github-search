@@ -21,11 +21,13 @@ const SettingsPanel = styled.div`
   }
   h4 {
     text-transform: capitalize;
+    margin-top: 5px;
   }
   h5 {
     text-transform: capitalize;
     padding-bottom: 0px;
     margin-bottom: 5px;
+    margin-top: 14px;
   }
   img {
     display: block;
@@ -48,11 +50,11 @@ const SettingsPanel = styled.div`
     width: 200px;
     right: 0px;
     top: 5.5em;
-    height: 300px;
+    height: 258px;
     position: fixed;
   }
   .content {
-    padding: 0.5em;
+    padding: 1em 0.4em 1em 1em;
     .colorContainer {
       border: 1px solid #eee;
       height: 25px;
@@ -60,6 +62,9 @@ const SettingsPanel = styled.div`
       width: 45%;
       display: inline-block;
       margin-right: 5px;
+      &:nth-child(2n) {
+        margin-right: 0px;
+      }
     }
     .colorItem {
       height: 25px;
