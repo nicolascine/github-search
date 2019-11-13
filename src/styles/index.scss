@@ -1,13 +1,62 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/*
+|  Variables and base styles 
+---------------------------- */
+
+@import-normalize;
+@import url("https://fonts.googleapis.com/css?family=Raleway:200i,300,400&display=swap");
+
+html {
+  --primaryBackground: #ffffff;
+  --primaryColor: #000000;
+  background-color: var(--primaryBackground);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  &[data-theme="light-purple"] {
+    --primaryBackground: #ffffff;
+    --primaryColor: #ac53f2;
+    --primaryTitles: #000;
+    --secondaryColor: #000;
+    --invertedPercentOnDark: 100;
+    --invertedPercentOnLight: 0;
+  }
+
+  &[data-theme="light-green"] {
+    --primaryBackground: #ffffff;
+    --primaryColor: #09c62a;
+    --primaryTitles: #000;
+    --secondaryColor: #000;
+    --invertedPercentOnDark: 100;
+    --invertedPercentOnLight: 0;
+  }
+
+  &[data-theme="dark-purple"] {
+    --primaryBackground: #000;
+    --primaryColor: #ac53f2;
+    --primaryTitles: #ac53f2;
+    --secondaryColor: #efefefd1;
+    --invertedPercentOnDark: 0;
+    --invertedPercentOnLight: 100;
+  }
+
+  &[data-theme="dark-green"] {
+    --primaryBackground: #000;
+    --primaryColor: #09c62a;
+    --primaryTitles: #09c62a;
+    --secondaryColor: #efefefd1;
+    --invertedPercentOnDark: 0;
+    --invertedPercentOnLight: 100;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+}
+
+#root {
+  height: 100vh;
 }

@@ -1,6 +1,74 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Github search, modern web app
 
-## Available Scripts
+### Challenge: create an app that allows making searches using the Github API, collect and display data from users and show info with links to their repositories.
+
+Stack: Typescript, React, GraphQL and Redux. Tests are made with Jest and Istambul for code coverage
+
+### Bonnus
+
+New features:
+
+This project adds some features to the original requirement:
+
+- Dynamic Themes (change css theme on demand through UI option) using native css variables
+- Add animations, page transitions and elements
+- Multilingual support (ES | EN | BR)
+- Fully responsive, without frameworks (using native flexbox css)
+- Apply guides for accesibility (WAI-ARIA standard)
+- [Progresive web app](https://developers.google.com/web/progressive-web-apps)
+- Persist settings on localStorage
+
+Good practices
+
+- Use Eslint (code linter with support for Typescript)
+- Prettier (code formatting) with a Pre-Commit hook (git)
+- [Semantic Commit Messages](https://www.conventionalcommits.org/en/v1.0.0/)
+
+## Project structure
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), and the main structure is proposed by this boilerplate, also, as a component strategy use "atomic design pattern" where the main goal is divide into differents component as is possible, finding a balance between coupling and cohesion.
+
+```
+├── App.test.tsx
+├── App.tsx
+├── assets
+├── common
+│   ├── Logo
+│   │   └── index.tsx
+│   ├── Search
+│   │   ├── Button.tsx
+│   │   ├── Input.tsx
+│   └── index.tsx
+├── config.tsx
+├── index.tsx
+├── pages
+│   ├── home
+│   └── results
+│       ├── components
+│       │   ├── Avatar.tsx
+│       │   ├── Info.tsx
+│       │   ├── Result.tsx
+│       │   ├── Sidebar.tsx
+│       │   └── index.tsx
+│       └── index.tsx
+├── react-app-env.d.ts
+├── serviceWorker.ts
+└── styles
+    ├── index.scss
+    └── variables.scss
+```
+
+Each component folder contains a directory called `__tests__` where test files are located with .test.tsx suffix.
+
+## Installation
+
+In the project directory, run:
+
+### `npm install`
+
+this command will install all needed project dependencies
+
+## Available commands (after installation)
 
 In the project directory, you can run:
 
@@ -25,20 +93,9 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Conventions
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Semantic Commit Messages
+- Semantic versioning
+- Gitflow, as a git strategy
+- Changelog
