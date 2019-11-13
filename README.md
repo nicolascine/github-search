@@ -95,7 +95,7 @@ Your app is ready to be deployed!
 
 ## Conventions
 
-- Semantic Commit Messages
-- Semantic versioning
-- Gitflow, as a git strategy
-- Changelog
+    - Semantic Commit Messages
+    - Semantic versioning
+    - Gitflow, as a git strategy
+    - Changelog [Standard Version]
