@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 import SettingsLogo from "../../assets/icons/settings.svg";
 import config from "../../config";
 
@@ -17,6 +18,9 @@ const SettingsPanel = styled.div`
     top: 2.5em;
     width: 35px;
     height: 35px;
+  }
+  h5 {
+    text-transform: capitalize;
   }
   img {
     display: block;
@@ -61,6 +65,7 @@ const SettingsPanel = styled.div`
 `;
 
 const Layout: React.FC = props => {
+  const { t, i18n } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
 
   const [currentTheme, setCurrentTheme] = useState(
@@ -89,6 +94,10 @@ const Layout: React.FC = props => {
     document.documentElement.setAttribute("data-theme", currentTheme);
   }, [currentTheme]);
 
+  const changeLanguage = (e: React.FormEvent<HTMLInputElement>) => {
+    i18n.changeLanguage(e.currentTarget.value);
+  };
+
   return (
     <>
       <AnimatePresence>
@@ -108,8 +117,7 @@ const Layout: React.FC = props => {
               transition={{ ease: "easeIn" }}
             >
               <div className="content">
-                <h5>Settings</h5>
-
+                <h5>{t("setting.label")}</h5>
                 {Object.keys(config.themes).map(
                   (theme: string, index: number) => (
                     <div
@@ -134,6 +142,29 @@ const Layout: React.FC = props => {
                     </div>
                   )
                 )}
+                <br />
+                <input
+                  onChange={changeLanguage}
+                  type="radio"
+                  value="en"
+                  name="language"
+                  defaultChecked
+                />
+                English
+                <input
+                  onChange={changeLanguage}
+                  type="radio"
+                  value="es"
+                  name="language"
+                />{" "}
+                Español
+                <input
+                  onChange={changeLanguage}
+                  type="radio"
+                  value="br"
+                  name="language"
+                />{" "}
+                Protugués
               </div>
             </motion.div>
           )}
