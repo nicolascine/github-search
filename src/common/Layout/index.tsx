@@ -19,8 +19,13 @@ const SettingsPanel = styled.div`
     width: 35px;
     height: 35px;
   }
+  h4 {
+    text-transform: capitalize;
+  }
   h5 {
     text-transform: capitalize;
+    padding-bottom: 0px;
+    margin-bottom: 5px;
   }
   img {
     display: block;
@@ -60,6 +65,21 @@ const SettingsPanel = styled.div`
       height: 25px;
       width: 50%;
       display: inline-block;
+    }
+    ul {
+      list-style: none;
+      padding: 0 5px;
+      margin: 0px;
+    }
+    li {
+      margin-bottom: 3px;
+    }
+    label {
+      cursor: pointer;
+      font-size: 0.8em;
+      input {
+        margin-right: 5px;
+      }
     }
   }
 `;
@@ -117,7 +137,8 @@ const Layout: React.FC = props => {
               transition={{ ease: "easeIn" }}
             >
               <div className="content">
-                <h5>{t("setting.label")}</h5>
+                <h4>{t("setting.label")}</h4>
+                <h5>{t("color.label")}</h5>
                 {Object.keys(config.themes).map(
                   (theme: string, index: number) => (
                     <div
@@ -142,29 +163,43 @@ const Layout: React.FC = props => {
                     </div>
                   )
                 )}
-                <br />
-                <input
-                  onChange={changeLanguage}
-                  type="radio"
-                  value="en"
-                  name="language"
-                  defaultChecked
-                />
-                English
-                <input
-                  onChange={changeLanguage}
-                  type="radio"
-                  value="es"
-                  name="language"
-                />{" "}
-                Español
-                <input
-                  onChange={changeLanguage}
-                  type="radio"
-                  value="br"
-                  name="language"
-                />{" "}
-                Protugués
+                <h5>{t("language.label")}</h5>
+                <ul>
+                  <li>
+                    <label>
+                      <input
+                        onChange={changeLanguage}
+                        type="radio"
+                        value="en"
+                        name="language"
+                        defaultChecked
+                      />
+                      English
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input
+                        onChange={changeLanguage}
+                        type="radio"
+                        value="es"
+                        name="language"
+                      />
+                      Español
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input
+                        onChange={changeLanguage}
+                        type="radio"
+                        value="br"
+                        name="language"
+                      />
+                      Portugués
+                    </label>
+                  </li>
+                </ul>
               </div>
             </motion.div>
           )}

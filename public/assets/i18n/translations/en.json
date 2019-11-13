@@ -1,4 +1,6 @@
 {
   "search.label": "search",
-  "setting.label": "settings"
+  "setting.label": "settings",
+  "language.label": "language",
+  "color.label": "colors"
 }
