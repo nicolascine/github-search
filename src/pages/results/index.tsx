@@ -1,9 +1,30 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useQuery } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
 import { Logo, Input, Loading } from "../../common";
 import NotFound from "./NotFound";
 import ResultList from "./ResultList";
+import EmptyResults from "./EmptyResults";
+
+const USER_DATA = gql`
+  query SearchReposByUser($queryString: String!) {
+    search(query: $queryString, type: REPOSITORY, first: 50) {
+      edges {
+        node {
+          ... on Repository {
+            name
+            description
+            stargazers {
+              totalCount
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 const Container = styled.div`
   display: flex;
@@ -46,7 +67,108 @@ const Container = styled.div`
   }
 `;
 
+const QueryContainer: React.FC<{ queryString: string }> = ({ queryString }) => {
+  const { loading, error, data } = useQuery(USER_DATA, {
+    variables: { queryString }
+  });
+
+  if (loading) return <Loading />;
+  if (error) return <NotFound />;
+
+  return (
+    <>
+      {!Object.keys(data.search.edges).length ? (
+        <EmptyResults />
+      ) : (
+        <ResultList
+          userInfo={{
+            userName: "Nicolás Silva",
+            userLogin: "@nicolascine",
+            imgUrl:
+              "https://avatars0.githubusercontent.com/u/2984968?s=460&v=4",
+            organization: "string",
+            location: "string",
+            star: "string",
+            repo: "string",
+            followers: "string"
+          }}
+          results={[
+            {
+              title: "scrap-state-machine",
+              description: "scrapper made with nodejs",
+              link: "http://google.com",
+              starCount: "50.000"
+            },
+            {
+              title: "scrap-state-machine",
+              description: "scrapper made with nodejs",
+              link: "http://google.com",
+              starCount: "50.000"
+            },
+            {
+              title: "scrap-state-machine",
+              description: "scrapper made with nodejs",
+              link: "http://google.com",
+              starCount: "50.000"
+            },
+            {
+              title: "scrap-state-machine",
+              description: "scrapper made with nodejs",
+              link: "http://google.com",
+              starCount: "50.000"
+            },
+            {
+              title: "scrap-state-machine",
+              description: "scrapper made with nodejs",
+              link: "http://google.com",
+              starCount: "50.000"
+            },
+            {
+              title: "scrap-state-machine",
+              description: "scrapper made with nodejs",
+              link: "http://google.com",
+              starCount: "50.000"
+            },
+            {
+              title: "scrap-state-machine",
+              description: "scrapper made with nodejs",
+              link: "http://google.com",
+              starCount: "50.000"
+            },
+            {
+              title: "scrap-state-machine",
+              description: "scrapper made with nodejs",
+              link: "http://google.com",
+              starCount: "50.000"
+            },
+            {
+              title: "scrap-state-machine",
+              description: "scrapper made with nodejs",
+              link: "http://google.com",
+              starCount: "50.000"
+            },
+            {
+              title: "scrap-state-machine",
+              description: "scrapper made with nodejs",
+              link: "http://google.com",
+              starCount: "50.000"
+            },
+            {
+              title: "scrap-state-machine",
+              description: "scrapper made with nodejs",
+              link: "http://google.com",
+              starCount: "50.000"
+            }
+          ]}
+        />
+      )}
+    </>
+  );
+};
+
 const Results: React.FC = () => {
+  const userName = "anakin";
+
   return (
     <>
       <Container>
@@ -64,90 +186,7 @@ const Results: React.FC = () => {
 
       <Container>
         <div className="row">
-          {/* <Loading /> */}
-          <ResultList
-            userInfo={{
-              userName: "Nicolás Silva",
-              userLogin: "@nicolascine",
-              imgUrl:
-                "https://avatars0.githubusercontent.com/u/2984968?s=460&v=4",
-              organization: "string",
-              location: "string",
-              star: "string",
-              repo: "string",
-              followers: "string"
-            }}
-            results={[
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              },
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              },
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              },
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              },
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              },
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              },
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              },
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              },
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              },
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              },
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              }
-            ]}
-          />
-
-          {/* <NotFound /> */}
+          <QueryContainer queryString={`user: ${userName}`} />
         </div>
       </Container>
     </>
