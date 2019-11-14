@@ -9,18 +9,37 @@ import ResultList from "./ResultList";
 import EmptyResults from "./EmptyResults";
 
 const USER_DATA = gql`
-  query SearchReposByUser($queryString: String!) {
-    search(query: $queryString, type: REPOSITORY, first: 50) {
+  query SearchReposByUser($login: String!, $queryString: String!) {
+    search(query: $queryString, type: REPOSITORY, first: 100) {
       edges {
         node {
           ... on Repository {
             name
             description
-            stargazers {
+            url
+            stargazers(orderBy: { field: STARRED_AT, direction: DESC }) {
               totalCount
             }
           }
         }
+      }
+    }
+    user(login: $login) {
+      name
+      login
+      organization(login: $login) {
+        name
+      }
+      avatarUrl
+      location
+      starredRepositories {
+        totalCount
+      }
+      repositories {
+        totalCount
+      }
+      followers {
+        totalCount
       }
     }
   }
@@ -67,9 +86,12 @@ const Container = styled.div`
   }
 `;
 
-const QueryContainer: React.FC<{ queryString: string }> = ({ queryString }) => {
+const QueryContainer: React.FC<{ queryString: string; owner: string }> = ({
+  queryString,
+  owner
+}) => {
   const { loading, error, data } = useQuery(USER_DATA, {
-    variables: { queryString }
+    variables: { queryString, login: owner }
   });
 
   if (loading) return <Loading />;
@@ -77,97 +99,17 @@ const QueryContainer: React.FC<{ queryString: string }> = ({ queryString }) => {
 
   return (
     <>
-      {!Object.keys(data.search.edges).length ? (
+      {!Object.keys(data.search.edges).length || !Object.keys(data.user) ? (
         <EmptyResults />
       ) : (
-        <ResultList
-          userInfo={{
-            userName: "Nicolás Silva",
-            userLogin: "@nicolascine",
-            imgUrl:
-              "https://avatars0.githubusercontent.com/u/2984968?s=460&v=4",
-            organization: "string",
-            location: "string",
-            star: "string",
-            repo: "string",
-            followers: "string"
-          }}
-          results={[
-            {
-              title: "scrap-state-machine",
-              description: "scrapper made with nodejs",
-              link: "http://google.com",
-              starCount: "50.000"
-            },
-            {
-              title: "scrap-state-machine",
-              description: "scrapper made with nodejs",
-              link: "http://google.com",
-              starCount: "50.000"
-            },
-            {
-              title: "scrap-state-machine",
-              description: "scrapper made with nodejs",
-              link: "http://google.com",
-              starCount: "50.000"
-            },
-            {
-              title: "scrap-state-machine",
-              description: "scrapper made with nodejs",
-              link: "http://google.com",
-              starCount: "50.000"
-            },
-            {
-              title: "scrap-state-machine",
-              description: "scrapper made with nodejs",
-              link: "http://google.com",
-              starCount: "50.000"
-            },
-            {
-              title: "scrap-state-machine",
-              description: "scrapper made with nodejs",
-              link: "http://google.com",
-              starCount: "50.000"
-            },
-            {
-              title: "scrap-state-machine",
-              description: "scrapper made with nodejs",
-              link: "http://google.com",
-              starCount: "50.000"
-            },
-            {
-              title: "scrap-state-machine",
-              description: "scrapper made with nodejs",
-              link: "http://google.com",
-              starCount: "50.000"
-            },
-            {
-              title: "scrap-state-machine",
-              description: "scrapper made with nodejs",
-              link: "http://google.com",
-              starCount: "50.000"
-            },
-            {
-              title: "scrap-state-machine",
-              description: "scrapper made with nodejs",
-              link: "http://google.com",
-              starCount: "50.000"
-            },
-            {
-              title: "scrap-state-machine",
-              description: "scrapper made with nodejs",
-              link: "http://google.com",
-              starCount: "50.000"
-            }
-          ]}
-        />
+        <ResultList userInfo={data.user} results={data.search.edges} />
       )}
     </>
   );
 };
 
 const Results: React.FC = () => {
-  const userName = "anakin";
+  const userName = "addyosmani";
 
   return (
     <>
@@ -186,7 +128,7 @@ const Results: React.FC = () => {
 
       <Container>
         <div className="row">
-          <QueryContainer queryString={`user: ${userName}`} />
+          <QueryContainer owner={userName} queryString={`user:${userName}`} />
         </div>
       </Container>
     </>
