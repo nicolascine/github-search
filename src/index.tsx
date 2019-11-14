@@ -1,14 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "@apollo/react-hooks";
+import config from "./config";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
 import "./styles/index.scss";
 
+const client = new ApolloClient({
+  uri: config.GRAPHQL_API_PATH,
+  headers: {
+    Authorization: `bearer ${config.GITHUB_TOKEN}`
+  }
+});
+
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <ApolloProvider client={client}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </ApolloProvider>,
   document.getElementById("root")
 );
 

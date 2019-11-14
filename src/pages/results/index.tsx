@@ -1,9 +1,59 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
+import { useQuery } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
+import { withRouter } from "react-router";
 import { Logo, Input, Loading } from "../../common";
+import config from "../../config";
 import NotFound from "./NotFound";
 import ResultList from "./ResultList";
+import EmptyResults from "./EmptyResults";
+
+const USER_DATA = gql`
+  query SearchReposByUser(
+    $login: String!
+    $queryString: String!
+    $pageSize: Int!
+  ) {
+    search(query: $queryString, type: REPOSITORY, first: $pageSize) {
+      edges {
+        node {
+          ... on Repository {
+            name
+            description
+            url
+            stargazers(orderBy: { field: STARRED_AT, direction: DESC }) {
+              totalCount
+            }
+          }
+        }
+      }
+    }
+    user(login: $login) {
+      name
+      login
+      organization(login: $login) {
+        name
+      }
+      avatarUrl
+      location
+      starredRepositories {
+        totalCount
+      }
+      repositories {
+        totalCount
+      }
+      followers {
+        totalCount
+      }
+    }
+  }
+`;
+
+const LoadingResultContainer = styled.div`
+  margin: 3em auto 0 auto;
+`;
 
 const Container = styled.div`
   display: flex;
@@ -46,7 +96,39 @@ const Container = styled.div`
   }
 `;
 
-const Results: React.FC = () => {
+const QueryContainer: React.FC<{
+  queryString: string;
+  owner: string;
+  pageSize: number;
+}> = ({ queryString, owner, pageSize }) => {
+  const { loading, error, data } = useQuery(USER_DATA, {
+    variables: { queryString, login: owner, pageSize }
+  });
+
+  if (loading)
+    return (
+      <LoadingResultContainer>
+        <Loading />
+      </LoadingResultContainer>
+    );
+  if (error) return <NotFound />;
+
+  return (
+    <>
+      {!Object.keys(data.search.edges).length || !Object.keys(data.user) ? (
+        <EmptyResults />
+      ) : (
+        <ResultList userInfo={data.user} results={data.search.edges} />
+      )}
+    </>
+  );
+};
+
+type TParams = { userName: string };
+
+const Results: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
+  const GITHUB_USER_NAME = match.params.userName;
+
   return (
     <>
       <Container>
@@ -57,101 +139,22 @@ const Results: React.FC = () => {
             </Link>
           </div>
           <div className="column content">
-            <Input />
+            <Input defaultValue={GITHUB_USER_NAME} />
           </div>
         </div>
       </Container>
 
       <Container>
         <div className="row">
-          {/* <Loading /> */}
-          <ResultList
-            userInfo={{
-              userName: "Nicolás Silva",
-              userLogin: "@nicolascine",
-              imgUrl:
-                "https://avatars0.githubusercontent.com/u/2984968?s=460&v=4",
-              organization: "string",
-              location: "string",
-              star: "string",
-              repo: "string",
-              followers: "string"
-            }}
-            results={[
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              },
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              },
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              },
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              },
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              },
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              },
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              },
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              },
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              },
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              },
-              {
-                title: "scrap-state-machine",
-                description: "scrapper made with nodejs",
-                link: "http://google.com",
-                starCount: "50.000"
-              }
-            ]}
+          <QueryContainer
+            pageSize={config.DEFAULT_SEARCH_RESULTS_AMOUNT}
+            owner={GITHUB_USER_NAME}
+            queryString={`user:${GITHUB_USER_NAME}`}
           />
-
-          {/* <NotFound /> */}
         </div>
       </Container>
     </>
   );
 };
 
-export default Results;
+export default withRouter(Results);

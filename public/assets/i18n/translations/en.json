@@ -2,5 +2,8 @@
   "search.label": "search",
   "setting.label": "settings",
   "language.label": "language",
-  "color.label": "colors"
+  "color.label": "colors",
+  "inputplaceholder.label": "Enter a username...",
+  "emptyrepos.label": "user without public repositories",
+  "notfounduser.label": "user not found"
 }

@@ -3,44 +3,52 @@ import { Sidebar, Result } from "./components";
 
 const ResultList: React.FC<{
   userInfo: {
-    userName: string;
-    userLogin: string;
-    imgUrl: string;
-    organization: string;
+    name: string;
+    avatarUrl: string;
+    followers: { totalCount: string };
+    repositories: { totalCount: string };
+    starredRepositories: {
+      totalCount: string;
+    };
     location: string;
-    star: string;
-    repo: string;
-    followers: string;
+    login: string;
+    organization: { name?: string };
   };
-  results: {
-    title: string;
-    description: string;
-    link: string;
-    starCount: string;
-  }[];
+  results: Array<{
+    node: {
+      name: string;
+      description: string;
+      url: string;
+      stargazers: { totalCount: string };
+    };
+  }>;
 }> = props => {
   return (
     <>
       <div className="column sidebar">
         <Sidebar
-          userName={props.userInfo.userName}
-          userLogin={props.userInfo.userLogin}
-          imgUrl={props.userInfo.imgUrl}
-          organization={props.userInfo.organization}
-          location={props.userInfo.location}
-          star={props.userInfo.star}
-          repo={props.userInfo.repo}
-          followers={props.userInfo.followers}
+          userName={props.userInfo.name}
+          userLogin={props.userInfo.login}
+          imgUrl={props.userInfo.avatarUrl}
+          organization={
+            props.userInfo.organization && props.userInfo.organization.name
+              ? props.userInfo.organization.name
+              : "-"
+          }
+          location={props.userInfo.location || "-"}
+          star={props.userInfo.starredRepositories.totalCount}
+          repo={props.userInfo.repositories.totalCount}
+          followers={props.userInfo.followers.totalCount}
         />
       </div>
       <div className="column content">
         {props.results.map((item, index) => (
           <Result
             key={index}
-            title={item.title}
-            description={item.description}
-            link={item.link}
-            starCount={item.starCount}
+            title={item.node.name}
+            description={item.node.description}
+            link={item.node.url}
+            starCount={item.node.stargazers.totalCount}
           />
         ))}
       </div>
