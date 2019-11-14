@@ -94,7 +94,7 @@ const Layout: React.FC = props => {
   const [isVisible, setIsVisible] = useState(false);
 
   const [currentTheme, setCurrentTheme] = useState(
-    config.themes[config.defaultTheme].name
+    config.THEMES[config.DEFAULT_THEME].name
   );
 
   const useOutsideEvent = function(ref: any) {
@@ -144,25 +144,25 @@ const Layout: React.FC = props => {
               <div className="content">
                 <h4>{t("setting.label")}</h4>
                 <h5>{t("color.label")}</h5>
-                {Object.keys(config.themes).map(
+                {Object.keys(config.THEMES).map(
                   (theme: string, index: number) => (
                     <div
                       key={index}
                       className="colorContainer"
                       onClick={(e: React.SyntheticEvent) =>
-                        setCurrentTheme(config.themes[theme].name)
+                        setCurrentTheme(config.THEMES[theme].name)
                       }
                     >
                       <div
                         className="colorItem"
                         style={{
-                          backgroundColor: `${config.themes[theme].background}`
+                          backgroundColor: `${config.THEMES[theme].background}`
                         }}
                       ></div>
                       <div
                         className="colorItem"
                         style={{
-                          backgroundColor: `${config.themes[theme].color}`
+                          backgroundColor: `${config.THEMES[theme].color}`
                         }}
                       ></div>
                     </div>

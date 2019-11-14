@@ -15,11 +15,16 @@ const ButtonWrapper = styled.div`
   }
 `;
 
-const Button: React.FC = () => {
+const Button: React.FC<{ onClick: Function }> = ({ onClick }) => {
   return (
     <ButtonWrapper>
-      <button>
-        <img src={SearchIcon} alt="Buscar" width="37" height="38" />
+      <button
+        onClick={(e: React.SyntheticEvent) => {
+          e.preventDefault();
+          onClick();
+        }}
+      >
+        <img src={SearchIcon} alt="Search" width="37" height="38" />
       </button>
     </ButtonWrapper>
   );

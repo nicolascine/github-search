@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
-const NotFoundWrapper = styled.div`
+const EmptyResultsWrapper = styled.div`
   color: var(--primaryColor);
   font-size: 2.5em;
   margin: 0 auto;
@@ -13,14 +13,14 @@ const NotFoundWrapper = styled.div`
     }
   }
 `;
-const NotFound: React.FC = () => {
-  const { t } = useTranslation();
 
+const EmptyResults: React.FC = () => {
+  const { t } = useTranslation();
   return (
-    <NotFoundWrapper>
-      <p>{t("notfounduser.label")} :( </p>
-    </NotFoundWrapper>
+    <EmptyResultsWrapper>
+      <p>{t("emptyrepos.label")}</p>
+    </EmptyResultsWrapper>
   );
 };
 
-export default NotFound;
+export default EmptyResults;
