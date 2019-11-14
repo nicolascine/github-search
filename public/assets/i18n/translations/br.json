@@ -3,6 +3,7 @@
   "setting.label": "configuração",
   "language.label": "língua",
   "color.label": "cores",
+  "inputplaceholder.label": "Digite um nome de usuário...",
   "emptyrepos.label": "usuário sem repositórios públicos",
   "notfounduser.label": "usuário não encontrado"
 }
