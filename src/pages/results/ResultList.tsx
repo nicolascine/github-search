@@ -3,7 +3,7 @@ import { Sidebar, Result } from "./components";
 
 const ResultList: React.FC<{
   userInfo: {
-    user: string;
+    name: string;
     avatarUrl: string;
     followers: { totalCount: string };
     repositories: { totalCount: string };
@@ -27,7 +27,7 @@ const ResultList: React.FC<{
     <>
       <div className="column sidebar">
         <Sidebar
-          userName={props.userInfo.user}
+          userName={props.userInfo.name}
           userLogin={props.userInfo.login}
           imgUrl={props.userInfo.avatarUrl}
           organization={
@@ -35,7 +35,7 @@ const ResultList: React.FC<{
               ? props.userInfo.organization.name
               : "-"
           }
-          location={props.userInfo.location}
+          location={props.userInfo.location || "-"}
           star={props.userInfo.starredRepositories.totalCount}
           repo={props.userInfo.repositories.totalCount}
           followers={props.userInfo.followers.totalCount}

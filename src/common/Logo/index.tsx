@@ -18,7 +18,7 @@ const LogoWrapper = styled.div`
 `;
 
 const Logo: React.FC = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <LogoWrapper>

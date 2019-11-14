@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { withRouter } from "react-router";
+import { RouteComponentProps } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Button from "./Button";
 
 const InputWrapper = styled.div`
@@ -20,6 +23,9 @@ const InputWrapper = styled.div`
     outline: none;
     border: none;
     flex: 1;
+    &::-webkit-input-placeholder {
+      font-style: italic;
+    }
   }
   & > .button__container {
     width: 100px;
@@ -29,15 +35,46 @@ const InputWrapper = styled.div`
   }
 `;
 
-const Input: React.FC = () => {
+const Input: React.FC<RouteComponentProps & { defaultValue?: string }> = ({
+  defaultValue,
+  history
+}) => {
+  const { t } = useTranslation();
+  const [currentValue, setCurrentValue] = useState("");
+
+  const handleButtonClick = () => {
+    if (currentValue && currentValue.length > 0) {
+      history.push(`/results/${currentValue.trim()}`);
+    }
+  };
+
+  const handleInputKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      if (currentValue && currentValue.length > 0) {
+        history.push(`/results/${currentValue.trim()}`);
+      }
+    }
+  };
+
+  const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setCurrentValue(e.currentTarget.value);
+  };
+
   return (
     <InputWrapper>
-      <input className="search__input" type="text" />
+      <input
+        className="search__input"
+        type="text"
+        defaultValue={defaultValue}
+        onKeyDown={handleInputKeyDown}
+        onChange={handleInputChange}
+        placeholder={t("inputplaceholder.label")}
+      />
       <div className="button__container">
-        <Button />
+        <Button onClick={handleButtonClick} />
       </div>
     </InputWrapper>
   );
 };
 
-export default Input;
+export default withRouter(Input);

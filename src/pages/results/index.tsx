@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import { withRouter } from "react-router";
 import { Logo, Input, Loading } from "../../common";
 import config from "../../config";
 import NotFound from "./NotFound";
@@ -48,6 +49,10 @@ const USER_DATA = gql`
       }
     }
   }
+`;
+
+const LoadingResultContainer = styled.div`
+  margin: 3em auto 0 auto;
 `;
 
 const Container = styled.div`
@@ -100,7 +105,12 @@ const QueryContainer: React.FC<{
     variables: { queryString, login: owner, pageSize }
   });
 
-  if (loading) return <Loading />;
+  if (loading)
+    return (
+      <LoadingResultContainer>
+        <Loading />
+      </LoadingResultContainer>
+    );
   if (error) return <NotFound />;
 
   return (
@@ -114,8 +124,10 @@ const QueryContainer: React.FC<{
   );
 };
 
-const Results: React.FC = () => {
-  const userName = "demo";
+type TParams = { userName: string };
+
+const Results: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
+  const GITHUB_USER_NAME = match.params.userName;
 
   return (
     <>
@@ -127,7 +139,7 @@ const Results: React.FC = () => {
             </Link>
           </div>
           <div className="column content">
-            <Input />
+            <Input defaultValue={GITHUB_USER_NAME} />
           </div>
         </div>
       </Container>
@@ -136,8 +148,8 @@ const Results: React.FC = () => {
         <div className="row">
           <QueryContainer
             pageSize={config.DEFAULT_SEARCH_RESULTS_AMOUNT}
-            owner={userName}
-            queryString={`user:${userName}`}
+            owner={GITHUB_USER_NAME}
+            queryString={`user:${GITHUB_USER_NAME}`}
           />
         </div>
       </Container>
@@ -145,4 +157,4 @@ const Results: React.FC = () => {
   );
 };
 
-export default Results;
+export default withRouter(Results);
