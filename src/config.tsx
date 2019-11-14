@@ -1,5 +1,7 @@
 export default {
-  themes: {
+  GRAPHQL_API_PATH: "https://api.github.com/graphql",
+  GITHUB_TOKEN: process.env.REACT_APP_GITUHB_API_TOKEN,
+  THEMES: {
     lightPurple: {
       name: "light-purple",
       color: "#ac53f2",
@@ -21,5 +23,6 @@ export default {
       background: "#000"
     }
   } as any,
-  defaultTheme: "lightPurple"
+  DEFAULT_THEME: "lightPurple",
+  DEFAULT_SEARCH_RESULTS_AMOUNT: 100
 };

@@ -3,14 +3,15 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
+import config from "./config";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
 import "./styles/index.scss";
 
 const client = new ApolloClient({
-  uri: "https://api.github.com/graphql",
+  uri: config.GRAPHQL_API_PATH,
   headers: {
-    Authorization: `bearer ${process.env.REACT_APP_GITUHB_API_TOKEN}`
+    Authorization: `bearer ${config.GITHUB_TOKEN}`
   }
 });
 

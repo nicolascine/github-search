@@ -4,13 +4,18 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import { Logo, Input, Loading } from "../../common";
+import config from "../../config";
 import NotFound from "./NotFound";
 import ResultList from "./ResultList";
 import EmptyResults from "./EmptyResults";
 
 const USER_DATA = gql`
-  query SearchReposByUser($login: String!, $queryString: String!) {
-    search(query: $queryString, type: REPOSITORY, first: 100) {
+  query SearchReposByUser(
+    $login: String!
+    $queryString: String!
+    $pageSize: Int!
+  ) {
+    search(query: $queryString, type: REPOSITORY, first: $pageSize) {
       edges {
         node {
           ... on Repository {
@@ -86,12 +91,13 @@ const Container = styled.div`
   }
 `;
 
-const QueryContainer: React.FC<{ queryString: string; owner: string }> = ({
-  queryString,
-  owner
-}) => {
+const QueryContainer: React.FC<{
+  queryString: string;
+  owner: string;
+  pageSize: number;
+}> = ({ queryString, owner, pageSize }) => {
   const { loading, error, data } = useQuery(USER_DATA, {
-    variables: { queryString, login: owner }
+    variables: { queryString, login: owner, pageSize }
   });
 
   if (loading) return <Loading />;
@@ -128,7 +134,11 @@ const Results: React.FC = () => {
 
       <Container>
         <div className="row">
-          <QueryContainer owner={userName} queryString={`user:${userName}`} />
+          <QueryContainer
+            pageSize={config.DEFAULT_SEARCH_RESULTS_AMOUNT}
+            owner={userName}
+            queryString={`user:${userName}`}
+          />
         </div>
       </Container>
     </>
