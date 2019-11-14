@@ -2,5 +2,7 @@
   "search.label": "búsqueda",
   "setting.label": "configuración",
   "language.label": "idioma",
-  "color.label": "colors"
+  "color.label": "colors",
+  "emptyrepos.label": "usuario sin repositorios públicos",
+  "notfounduser.label": "usuario no encontrado"
 }

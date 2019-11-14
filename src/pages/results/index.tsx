@@ -115,7 +115,7 @@ const QueryContainer: React.FC<{
 };
 
 const Results: React.FC = () => {
-  const userName = "addyosmani";
+  const userName = "demo";
 
   return (
     <>
