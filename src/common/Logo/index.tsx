@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
 const LogoWrapper = styled.div`
@@ -17,9 +18,16 @@ const LogoWrapper = styled.div`
 `;
 
 const Logo: React.FC = () => {
+  const { t, i18n } = useTranslation();
+
   return (
     <LogoWrapper>
-      Github<span>Search</span>
+      Github
+      <span>
+        {`${t("search.label")
+          .charAt(0)
+          .toUpperCase()}${t("search.label").slice(1)}`}
+      </span>
     </LogoWrapper>
   );
 };

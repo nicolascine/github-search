@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 import SettingsLogo from "../../assets/icons/settings.svg";
 import config from "../../config";
 
@@ -17,6 +18,16 @@ const SettingsPanel = styled.div`
     top: 2.5em;
     width: 35px;
     height: 35px;
+  }
+  h4 {
+    text-transform: capitalize;
+    margin-top: 5px;
+  }
+  h5 {
+    text-transform: capitalize;
+    padding-bottom: 0px;
+    margin-bottom: 5px;
+    margin-top: 14px;
   }
   img {
     display: block;
@@ -39,11 +50,11 @@ const SettingsPanel = styled.div`
     width: 200px;
     right: 0px;
     top: 5.5em;
-    height: 300px;
+    height: 258px;
     position: fixed;
   }
   .content {
-    padding: 0.5em;
+    padding: 1em 0.4em 1em 1em;
     .colorContainer {
       border: 1px solid #eee;
       height: 25px;
@@ -51,16 +62,35 @@ const SettingsPanel = styled.div`
       width: 45%;
       display: inline-block;
       margin-right: 5px;
+      &:nth-child(2n) {
+        margin-right: 0px;
+      }
     }
     .colorItem {
       height: 25px;
       width: 50%;
       display: inline-block;
     }
+    ul {
+      list-style: none;
+      padding: 0 5px;
+      margin: 0px;
+    }
+    li {
+      margin-bottom: 3px;
+    }
+    label {
+      cursor: pointer;
+      font-size: 0.8em;
+      input {
+        margin-right: 5px;
+      }
+    }
   }
 `;
 
 const Layout: React.FC = props => {
+  const { t, i18n } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
 
   const [currentTheme, setCurrentTheme] = useState(
@@ -89,6 +119,10 @@ const Layout: React.FC = props => {
     document.documentElement.setAttribute("data-theme", currentTheme);
   }, [currentTheme]);
 
+  const changeLanguage = (e: React.FormEvent<HTMLInputElement>) => {
+    i18n.changeLanguage(e.currentTarget.value);
+  };
+
   return (
     <>
       <AnimatePresence>
@@ -108,8 +142,8 @@ const Layout: React.FC = props => {
               transition={{ ease: "easeIn" }}
             >
               <div className="content">
-                <h5>Settings</h5>
-
+                <h4>{t("setting.label")}</h4>
+                <h5>{t("color.label")}</h5>
                 {Object.keys(config.themes).map(
                   (theme: string, index: number) => (
                     <div
@@ -134,6 +168,43 @@ const Layout: React.FC = props => {
                     </div>
                   )
                 )}
+                <h5>{t("language.label")}</h5>
+                <ul>
+                  <li>
+                    <label>
+                      <input
+                        onChange={changeLanguage}
+                        type="radio"
+                        value="en"
+                        name="language"
+                        defaultChecked
+                      />
+                      English
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input
+                        onChange={changeLanguage}
+                        type="radio"
+                        value="es"
+                        name="language"
+                      />
+                      Español
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input
+                        onChange={changeLanguage}
+                        type="radio"
+                        value="br"
+                        name="language"
+                      />
+                      Portugués
+                    </label>
+                  </li>
+                </ul>
               </div>
             </motion.div>
           )}
