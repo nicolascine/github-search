@@ -32,6 +32,9 @@ const InputWrapper = styled.div`
     height: 50px;
     border-radius: 0px 2px 2px 0px;
     background-color: var(--primaryColor);
+    &:hover {
+      box-shadow: inset 0px 0px 31px -20px;
+    }
   }
 `;
 
