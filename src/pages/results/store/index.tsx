@@ -1,13 +1,6 @@
-import {
-  RepoItem,
-  ResultsState,
-  REQUEST_RESULTS,
-  ResultsActionTypes
-} from "./types";
+import { ResultsState, REQUEST_RESULTS, ResultsActionTypes } from "./types";
 
-const initialState: ResultsState = {
-  results: []
-};
+const initialState: ResultsState = {};
 
 export function resultsReducer(
   state = initialState,
