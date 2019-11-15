@@ -1,14 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import { gql } from "apollo-boost";
 import { Link, RouteComponentProps } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
+import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { Logo, Input, Loading } from "../../common";
 import config from "../../config";
 import NotFound from "./NotFound";
 import ResultList from "./ResultList";
 import EmptyResults from "./EmptyResults";
+import { ResultsState } from "./store/types";
 
 const USER_DATA = gql`
   query SearchReposByUser(
@@ -124,9 +126,9 @@ const QueryContainer: React.FC<{
   );
 };
 
-type TParams = { userName: string };
-
-const Results: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
+const Results: React.FC<RouteComponentProps<{ userName: string }>> = ({
+  match
+}) => {
   const GITHUB_USER_NAME = match.params.userName;
 
   return (
@@ -157,4 +159,8 @@ const Results: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
   );
 };
 
-export default withRouter(Results);
+const mapStateToProps = (state: ResultsState) => ({
+  results: state.results
+});
+
+export default withRouter(connect(mapStateToProps)(Results));
