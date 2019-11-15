@@ -187,10 +187,10 @@ const Layout: React.FC = props => {
                       <input
                         onChange={changeLanguage}
                         type="radio"
-                        value="es"
+                        value="br"
                         name="language"
                       />
-                      Español
+                      Portuguese
                     </label>
                   </li>
                   <li>
@@ -198,10 +198,10 @@ const Layout: React.FC = props => {
                       <input
                         onChange={changeLanguage}
                         type="radio"
-                        value="br"
+                        value="es"
                         name="language"
                       />
-                      Portugués
+                      Spanish
                     </label>
                   </li>
                 </ul>
