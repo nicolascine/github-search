@@ -5,15 +5,31 @@ export interface RepoItem {
   starCount: string;
 }
 
+export interface UserInfo {
+  userName: string;
+  userLogin: string;
+  organization: string;
+  location: string;
+  star: string;
+  repo: string;
+  followers: string;
+}
+
 export interface ResultsState {
+  userInfo?: UserInfo[];
   results?: RepoItem[];
 }
 
+export const REQUEST_USER_INFO = "REQUEST_USER_INFO";
 export const REQUEST_RESULTS = "REQUEST_RESULTS";
 
+interface RequestUserInfoAction {
+  type: typeof REQUEST_USER_INFO;
+  payload: UserInfo;
+}
 interface RequestResultsAction {
   type: typeof REQUEST_RESULTS;
   payload: RepoItem;
 }
 
-export type ResultsActionTypes = RequestResultsAction;
+export type ResultsActionTypes = RequestResultsAction | RequestUserInfoAction;
