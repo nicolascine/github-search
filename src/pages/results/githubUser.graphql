@@ -1,0 +1,38 @@
+query SearchReposByUser(
+  $login: String!
+  $queryString: String!
+  $pageSize: Int!
+) {
+  search(query: $queryString, type: REPOSITORY, first: $pageSize) {
+    edges {
+      node {
+        ... on Repository {
+          name
+          description
+          url
+          stargazers(orderBy: { field: STARRED_AT, direction: DESC }) {
+            totalCount
+          }
+        }
+      }
+    }
+  }
+  user(login: $login) {
+    name
+    login
+    organization(login: $login) {
+      name
+    }
+    avatarUrl
+    location
+    starredRepositories {
+      totalCount
+    }
+    repositories {
+      totalCount
+    }
+    followers {
+      totalCount
+    }
+  }
+}
