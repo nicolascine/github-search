@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { gql } from "apollo-boost";
+import { loader } from "graphql.macro";
 import { Link, RouteComponentProps } from "react-router-dom";
 import { withRouter } from "react-router";
 import { useQuery } from "@apollo/react-hooks";
@@ -15,50 +15,9 @@ import {
 import { requestUserInfo, requestItems } from "./store/actions";
 import { Logo, Input, Loading } from "../../common";
 import config from "../../config";
-import NotFound from "./NotFound";
-import ResultList from "./ResultList";
-import EmptyResults from "./EmptyResults";
+import { NotFound, ResultList, EmptyResults } from "./components";
 
-const USER_DATA = gql`
-  query SearchReposByUser(
-    $login: String!
-    $queryString: String!
-    $pageSize: Int!
-  ) {
-    search(query: $queryString, type: REPOSITORY, first: $pageSize) {
-      edges {
-        node {
-          ... on Repository {
-            name
-            description
-            url
-            stargazers(orderBy: { field: STARRED_AT, direction: DESC }) {
-              totalCount
-            }
-          }
-        }
-      }
-    }
-    user(login: $login) {
-      name
-      login
-      organization(login: $login) {
-        name
-      }
-      avatarUrl
-      location
-      starredRepositories {
-        totalCount
-      }
-      repositories {
-        totalCount
-      }
-      followers {
-        totalCount
-      }
-    }
-  }
-`;
+const USER_DATA = loader("./githubUser.graphql");
 
 const LoadingResultContainer = styled.div`
   margin: 3em auto 0 auto;

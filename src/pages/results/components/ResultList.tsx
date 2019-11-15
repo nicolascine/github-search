@@ -1,5 +1,5 @@
 import React from "react";
-import { Sidebar, Result } from "./components";
+import { Sidebar, Result } from "./index";
 
 const ResultList: React.FC<{
   userInfo: {
