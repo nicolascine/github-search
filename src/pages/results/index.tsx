@@ -17,7 +17,7 @@ import { Logo, Input, Loading } from "../../common";
 import config from "../../config";
 import { NotFound, ResultList, EmptyResults } from "./components";
 
-const USER_DATA = loader("./githubUser.graphql");
+const USER_DATA = loader("./github-user.graphql");
 
 const LoadingResultContainer = styled.div`
   margin: 3em auto 0 auto;
@@ -80,21 +80,21 @@ const QueryContainer: React.FC<{
   const { loading, error, data } = useQuery(USER_DATA, {
     variables: { queryString, login: owner, pageSize },
     onCompleted: data => {
-      console.log("data --->", data);
-
       const array: any = [];
 
       data.search.edges.map((item: any) => {
         array.push({
           description: item.node.description,
-          name: item.node.name,
+          title: item.node.name,
           starCount: item.node.stargazers.totalCount,
-          url: item.node.url
+          link: item.node.url
         });
       });
+
       requestUserInfoAction({
         userName: data.user.name,
         userLogin: data.user.login,
+        avatarUrl: data.user.avatarUrl,
         organization: data.user.organization,
         location: data.user.location,
         star: data.user.starredRepositories.totalCount,
@@ -113,15 +113,19 @@ const QueryContainer: React.FC<{
     );
   if (error) return <NotFound />;
 
-  return (
-    <>
-      {!Object.keys(data.search.edges).length || !Object.keys(data.user) ? (
-        <EmptyResults />
-      ) : (
-        <ResultList userInfo={data.user} results={data.search.edges} />
-      )}
-    </>
-  );
+  if (!data.search.edges || !data.user) {
+    return <p>Error :( </p>;
+  } else {
+    return (
+      <>
+        {!Object.keys(data.search.edges).length || !Object.keys(data.user) ? (
+          <EmptyResults />
+        ) : (
+          <ResultList />
+        )}
+      </>
+    );
+  }
 };
 
 const mapStateToProps = (state: ResultsState) => ({
@@ -132,7 +136,7 @@ const mapDispatchToProps = (dispatch: Dispatch<ResultsActionTypes>) => {
   return {
     requestUserInfoAction: (userInfo: UserInfo) =>
       dispatch(requestUserInfo(userInfo)),
-    requestResultsAction: (item: RepoItem) => dispatch(requestItems(item))
+    requestResultsAction: (item: RepoItem[]) => dispatch(requestItems(item))
   };
 };
 

@@ -8,6 +8,7 @@ export interface RepoItem {
 export interface UserInfo {
   userName: string;
   userLogin: string;
+  avatarUrl: string;
   organization: string;
   location: string;
   star: string;
@@ -15,9 +16,12 @@ export interface UserInfo {
   followers: string;
 }
 
+export interface UserInfoState {
+  userInfo: UserInfo;
+}
+
 export interface ResultsState {
-  userInfo?: UserInfo[];
-  results?: RepoItem[];
+  results: RepoItem[];
 }
 
 export const REQUEST_USER_INFO = "REQUEST_USER_INFO";
@@ -29,7 +33,7 @@ interface RequestUserInfoAction {
 }
 interface RequestResultsAction {
   type: typeof REQUEST_RESULTS;
-  payload: RepoItem;
+  payload: RepoItem[];
 }
 
 export type ResultsActionTypes = RequestResultsAction | RequestUserInfoAction;

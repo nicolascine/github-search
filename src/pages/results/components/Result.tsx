@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { RepoItem } from "../store/types";
 import star from "../../../assets/icons/star.svg";
 
 const Item = styled.div`
@@ -37,27 +38,22 @@ const Item = styled.div`
   }
 `;
 
-const Result: React.FC<{
-  title: string;
-  description: string;
-  link: string;
-  starCount: string;
-}> = props => {
+const Result: React.FC<{ item: RepoItem }> = ({ item }) => {
   return (
     <Item>
       <div className="title">
         <a
-          title={props.title}
-          href={props.link}
+          title={item.title}
+          href={item.link}
           target="_blank"
           rel="noopener noreferrer"
         >
-          {props.title}
+          {item.title}
         </a>
       </div>
-      <div className="description">{props.description}</div>
+      <div className="description">{item.description}</div>
       <div className="stars">
-        <img src={star} width="24" height="24" alt="stars" /> {props.starCount}
+        <img src={star} width="24" height="24" alt="stars" /> {item.starCount}
       </div>
     </Item>
   );

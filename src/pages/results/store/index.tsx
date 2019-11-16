@@ -1,16 +1,17 @@
 import {
-  ResultsState,
+  UserInfo,
+  RepoItem,
   REQUEST_RESULTS,
   REQUEST_USER_INFO,
   ResultsActionTypes
 } from "./types";
 
-const initialState: ResultsState = {};
+const userInfoInitialState: UserInfo = {} as UserInfo;
 
 export function userInfoReducer(
-  state = initialState,
+  state = userInfoInitialState,
   action: ResultsActionTypes
-): ResultsState {
+): UserInfo {
   switch (action.type) {
     case REQUEST_USER_INFO: {
       return {
@@ -23,16 +24,15 @@ export function userInfoReducer(
   }
 }
 
+const resultsInitialState: RepoItem[] = [];
+
 export function resultsReducer(
-  state = initialState,
+  state = resultsInitialState,
   action: ResultsActionTypes
-): ResultsState {
+): RepoItem[] {
   switch (action.type) {
     case REQUEST_RESULTS: {
-      return {
-        ...state,
-        ...action.payload
-      };
+      return action.payload;
     }
     default:
       return state;

@@ -13,7 +13,7 @@ export function requestUserInfo(newItem: UserInfo): ResultsActionTypes {
   };
 }
 
-export function requestItems(newItem: RepoItem): ResultsActionTypes {
+export function requestItems(newItem: RepoItem[]): ResultsActionTypes {
   return {
     type: REQUEST_RESULTS,
     payload: newItem
