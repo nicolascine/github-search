@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import i18n from "i18next";
 import SettingsLogo from "../../assets/icons/settings.svg";
 import config from "../../config";
 
@@ -88,6 +89,8 @@ const SettingsPanel = styled.div`
     }
   }
 `;
+const getCurrentLng = () =>
+  i18n.language || window.localStorage.i18nextLng || "";
 
 const Layout: React.FC = props => {
   const { t, i18n } = useTranslation();
@@ -177,7 +180,7 @@ const Layout: React.FC = props => {
                         type="radio"
                         value="en"
                         name="language"
-                        defaultChecked
+                        defaultChecked={getCurrentLng() === "en"}
                       />
                       English
                     </label>
@@ -187,10 +190,11 @@ const Layout: React.FC = props => {
                       <input
                         onChange={changeLanguage}
                         type="radio"
-                        value="es"
+                        value="br"
                         name="language"
+                        defaultChecked={getCurrentLng() === "br"}
                       />
-                      Español
+                      Portuguese
                     </label>
                   </li>
                   <li>
@@ -198,10 +202,11 @@ const Layout: React.FC = props => {
                       <input
                         onChange={changeLanguage}
                         type="radio"
-                        value="br"
+                        value="es"
                         name="language"
+                        defaultChecked={getCurrentLng() === "es"}
                       />
-                      Portugués
+                      Spanish
                     </label>
                   </li>
                 </ul>

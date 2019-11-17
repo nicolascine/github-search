@@ -1,37 +1,23 @@
 import React from "react";
+import { UserInfo } from "../store/types";
 import { Avatar, Info } from "./index";
 
-type userInfo = {
-  userName: string;
-  userLogin: string;
-  imgUrl: string;
-  organization: string;
-  location: string;
-  star: string;
-  repo: string;
-  followers: string;
-};
-
-const Sidebar: React.FC<userInfo> = props => {
+const Sidebar: React.FC<{ info: UserInfo }> = ({ info }) => {
   return (
     <>
-      <Avatar userName={props.userName} imgURL={props.imgUrl} />
-      <Info content={props.userName} className="userName" />
-      <Info content={props.userLogin} className="userLogin" />
+      <Avatar userName={info.userName} imgURL={info.avatarUrl} />
+      <Info content={info.userName} className="userName" />
+      <Info content={info.userLogin} className="userLogin" />
       <Info
-        content={props.organization}
+        content={info.organization}
         iconName="organization"
         className="organization"
       />
-      <Info iconName="location" content={props.location} className="location" />
-      <Info iconName="star" content={props.star} className="startCount" />
+      <Info iconName="location" content={info.location} className="location" />
+      <Info iconName="star" content={info.star} className="startCount" />
+      <Info iconName="repo" content={info.repo} className="repositoriesCount" />
       <Info
-        iconName="repo"
-        content={props.repo}
-        className="repositoriesCount"
-      />
-      <Info
-        content={props.followers}
+        content={info.followers}
         iconName="followers"
         className="followersCount"
       />
