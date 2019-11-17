@@ -12,7 +12,7 @@ This project adds some features to the original requirement:
 
 - Dynamic Themes (change css theme on demand through UI option) using native css variables
 - Add animations, page transitions and elements
-- Multilingual support (ES | EN | BR)
+- Multilingual support (EN | BR | ES)
 - Fully responsive, without frameworks (using native flexbox css)
 - Apply guides for accesibility (WAI-ARIA standard)
 - [Progresive web app](https://developers.google.com/web/progressive-web-apps)
@@ -62,7 +62,13 @@ Each component folder contains a directory called `__tests__` where test files a
 
 ## Installation
 
-In the project directory, run:
+Add `.env` file with your Github Token
+
+```
+REACT_APP_GITUHB_API_TOKEN=___YOUR_TOKEN_HERE___
+```
+
+After that, in the project directory, run:
 
 ### `npm install`
 

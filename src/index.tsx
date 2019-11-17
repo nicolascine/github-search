@@ -1,8 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
+import { Provider } from "react-redux";
+import configureStore, { history } from "./store/configureStore";
 import config from "./config";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
@@ -15,11 +17,15 @@ const client = new ApolloClient({
   }
 });
 
+const store = configureStore();
+
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
+    </Provider>
   </ApolloProvider>,
   document.getElementById("root")
 );

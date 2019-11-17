@@ -1,55 +1,23 @@
 import React from "react";
 import styled from "styled-components";
+import { loader } from "graphql.macro";
 import { Link, RouteComponentProps } from "react-router-dom";
-import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
 import { withRouter } from "react-router";
+import { useQuery } from "@apollo/react-hooks";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import {
+  ResultsState,
+  ResultsActionTypes,
+  RepoItem,
+  UserInfo
+} from "./store/types";
+import { requestUserInfo, requestItems } from "./store/actions";
 import { Logo, Input, Loading } from "../../common";
 import config from "../../config";
-import NotFound from "./NotFound";
-import ResultList from "./ResultList";
-import EmptyResults from "./EmptyResults";
+import { NotFound, ResultList, EmptyResults } from "./components";
 
-const USER_DATA = gql`
-  query SearchReposByUser(
-    $login: String!
-    $queryString: String!
-    $pageSize: Int!
-  ) {
-    search(query: $queryString, type: REPOSITORY, first: $pageSize) {
-      edges {
-        node {
-          ... on Repository {
-            name
-            description
-            url
-            stargazers(orderBy: { field: STARRED_AT, direction: DESC }) {
-              totalCount
-            }
-          }
-        }
-      }
-    }
-    user(login: $login) {
-      name
-      login
-      organization(login: $login) {
-        name
-      }
-      avatarUrl
-      location
-      starredRepositories {
-        totalCount
-      }
-      repositories {
-        totalCount
-      }
-      followers {
-        totalCount
-      }
-    }
-  }
-`;
+const USER_DATA = loader("./github-user.graphql");
 
 const LoadingResultContainer = styled.div`
   margin: 3em auto 0 auto;
@@ -100,9 +68,41 @@ const QueryContainer: React.FC<{
   queryString: string;
   owner: string;
   pageSize: number;
-}> = ({ queryString, owner, pageSize }) => {
+  requestUserInfoAction: Function;
+  requestResultsAction: Function;
+}> = ({
+  queryString,
+  owner,
+  pageSize,
+  requestUserInfoAction,
+  requestResultsAction
+}) => {
   const { loading, error, data } = useQuery(USER_DATA, {
-    variables: { queryString, login: owner, pageSize }
+    variables: { queryString, login: owner, pageSize },
+    onCompleted: data => {
+      const array: any = [];
+
+      data.search.edges.map((item: any) => {
+        array.push({
+          description: item.node.description,
+          title: item.node.name,
+          starCount: item.node.stargazers.totalCount,
+          link: item.node.url
+        });
+      });
+
+      requestUserInfoAction({
+        userName: data.user.name,
+        userLogin: data.user.login,
+        avatarUrl: data.user.avatarUrl,
+        organization: data.user.organization,
+        location: data.user.location,
+        star: data.user.starredRepositories.totalCount,
+        repo: data.user.repositories.totalCount,
+        followers: data.user.followers.totalCount
+      });
+      requestResultsAction(array);
+    }
   });
 
   if (loading)
@@ -113,20 +113,39 @@ const QueryContainer: React.FC<{
     );
   if (error) return <NotFound />;
 
-  return (
-    <>
-      {!Object.keys(data.search.edges).length || !Object.keys(data.user) ? (
-        <EmptyResults />
-      ) : (
-        <ResultList userInfo={data.user} results={data.search.edges} />
-      )}
-    </>
-  );
+  if (!data.search.edges || !data.user) {
+    return <p>Error :( </p>;
+  } else {
+    return (
+      <>
+        {!Object.keys(data.search.edges).length || !Object.keys(data.user) ? (
+          <EmptyResults />
+        ) : (
+          <ResultList />
+        )}
+      </>
+    );
+  }
 };
 
-type TParams = { userName: string };
+const mapStateToProps = (state: ResultsState) => ({
+  results: state.results
+});
 
-const Results: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
+const mapDispatchToProps = (dispatch: Dispatch<ResultsActionTypes>) => {
+  return {
+    requestUserInfoAction: (userInfo: UserInfo) =>
+      dispatch(requestUserInfo(userInfo)),
+    requestResultsAction: (item: RepoItem[]) => dispatch(requestItems(item))
+  };
+};
+
+const Results: React.FC<
+  RouteComponentProps<{ userName: string }> & {
+    requestUserInfoAction: Function;
+    requestResultsAction: Function;
+  }
+> = ({ match, requestUserInfoAction, requestResultsAction }) => {
   const GITHUB_USER_NAME = match.params.userName;
 
   return (
@@ -147,6 +166,8 @@ const Results: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
       <Container>
         <div className="row">
           <QueryContainer
+            requestUserInfoAction={requestUserInfoAction}
+            requestResultsAction={requestResultsAction}
             pageSize={config.DEFAULT_SEARCH_RESULTS_AMOUNT}
             owner={GITHUB_USER_NAME}
             queryString={`user:${GITHUB_USER_NAME}`}
@@ -157,4 +178,9 @@ const Results: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
   );
 };
 
-export default withRouter(Results);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Results)
+);
