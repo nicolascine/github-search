@@ -1,8 +1,12 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/077542c3-a8f4-4f19-b252-ba98df7b643f/deploy-status)](https://app.netlify.com/sites/github-search-react/deploys)
+
 # Github search, modern web app
 
 ### Challenge: create an app that allows making searches using the Github API, collect and display data from users and show info with links to their repositories.
 
 Stack: Typescript, React, GraphQL and Redux. Tests are made with Jest and Istambul for code coverage
+
+:white_check_mark: Live version: [github-search-react.netlify.com](github-search-react.netlify.com)
 
 ### Bonnus
 
