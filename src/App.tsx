@@ -12,7 +12,6 @@ const App: React.FC = () => {
         <Layout>
           <Switch>
             <Route exact path="/" component={Home} />
-            {/* both /roster and /roster/:number begin with /roster */}
             <Route path="/results/:userName" component={Results} />
           </Switch>
         </Layout>

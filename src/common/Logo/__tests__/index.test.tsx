@@ -27,8 +27,6 @@ i18n
   });
 
 const Component = () => {
-  // const { t } = useTranslation();
-
   return (
     <React.Suspense fallback={<div>Loading... </div>}>
       <Logo />
