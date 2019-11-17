@@ -6,7 +6,7 @@
 
 Stack: Typescript, React, GraphQL and Redux. Tests are made with Jest and Istambul for code coverage
 
-:white_check_mark: Live version: [github-search-react.netlify.com](github-search-react.netlify.com)
+:white_check_mark: Live version: [github-search-react.netlify.com](https://github-search-react.netlify.com)
 
 ### Bonnus
 
