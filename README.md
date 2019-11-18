@@ -82,24 +82,24 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ├── App.tsx
 ├── assets
 ├── common
-│   ├── Logo
-│   │   └── index.tsx
-│   ├── Search
-│   │   ├── Button.tsx
-│   │   ├── Input.tsx
-│   └── index.tsx
+│   ├── Logo
+│   │   └── index.tsx
+│   ├── Search
+│   │   ├── Button.tsx
+│   │   ├── Input.tsx
+│   └── index.tsx
 ├── config.tsx
 ├── index.tsx
 ├── pages
-│   ├── home
-│   └── results
-│       ├── components
-│       │   ├── Avatar.tsx
-│       │   ├── Info.tsx
-│       │   ├── Result.tsx
-│       │   ├── Sidebar.tsx
-│       │   └── index.tsx
-│       └── index.tsx
+│   ├── home
+│   └── results
+│       ├── components
+│       │   ├── Avatar.tsx
+│       │   ├── Info.tsx
+│       │   ├── Result.tsx
+│       │   ├── Sidebar.tsx
+│       │   └── index.tsx
+│       └── index.tsx
 ├── react-app-env.d.ts
 ├── serviceWorker.ts
 └── styles
@@ -114,11 +114,7 @@ Each component folder contains a directory called `__tests__` where test files a
 One of the main advantages of using GraphQL is the declarative way in how we write the queries to the server, for this example application, the query groups the user information and its repositories using the username, type and order parameters as variables (example: direction DESC on stars) (located on: `src/pages/results/github-user.graphql`)
 
 ```graphql
-query SearchReposByUser(
-  $login: String!
-  $queryString: String!
-  $pageSize: Int!
-) {
+query SearchReposByUser($login: String!, $queryString: String!, $pageSize: Int!) {
   search(query: $queryString, type: REPOSITORY, first: $pageSize) {
     edges {
       node {
@@ -160,6 +156,10 @@ Because the control of the local state in apollo client is still incipient, and 
 
 On the other hand using the advantages of GraphQL and the cache of apollo client in each query.
 
+This configuration allows passing values from the Apollo store to redux, using a serializing layer that will keep the container component (data handler) agnostic of data fetching by means of a stateless component.
+
+In the future, the challenge will be to keep the Apollo cache updated with the Redux store automatically.
+
 ```
   +---------------------+
   |     Apollo Client   |
@@ -187,6 +187,16 @@ With this approach, you can use [redux devs tools](https://chrome.google.com/web
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.3.0](https://github.com/nicolascine/github-search/compare/v1.1.3...v1.3.0) (2019-11-18)
+
+### Features
+
+- update manifiest.json ([0bb0995](https://github.com/nicolascine/github-search/commit/0bb099529dfc157867087271584cf9df6834225f))
+
+### Bug Fixes
+
+- update translation [ES](<[0a34d5c](https://github.com/nicolascine/github-search/commit/0a34d5c1774de2c5d92ac1c7124d318a4d7de084)>)
 
 ## [1.2.0](https://github.com/nicolascine/github-search/compare/v1.1.2...v1.2.0) (2019-11-17)
 
