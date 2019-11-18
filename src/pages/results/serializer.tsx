@@ -32,6 +32,7 @@ export default class ResultSerializer {
     name: string
     login: string
     organization: string | null
+    company: string | null
     avatarUrl: string
     location: string
     starredRepositories: { totalCount: number; __typename: string }
@@ -42,8 +43,9 @@ export default class ResultSerializer {
     return {
       userName: userData.name,
       userLogin: userData.login,
+      company: userData.company,
       avatarUrl: userData.avatarUrl,
-      organization: userData.organization,
+      organization: userData.company,
       location: userData.location,
       star: userData.starredRepositories.totalCount,
       repo: userData.repositories.totalCount,

@@ -1,8 +1,4 @@
-query SearchReposByUser(
-  $login: String!
-  $queryString: String!
-  $pageSize: Int!
-) {
+query SearchReposByUser($login: String!, $queryString: String!, $pageSize: Int!) {
   search(query: $queryString, type: REPOSITORY, first: $pageSize) {
     edges {
       node {
@@ -20,6 +16,7 @@ query SearchReposByUser(
   user(login: $login) {
     name
     login
+    company
     organization(login: $login) {
       name
     }
