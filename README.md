@@ -9,7 +9,7 @@ Stack: Typescript, React, GraphQL with Apollo Client and Redux, and Jest for tes
 
 :white_check_mark: Live version: [github-search-react.netlify.com](https://github-search-react.netlify.com)
 
-### Roadmap:
+#### Roadmap:
 
 - [x] Display search UI and results page with data fetched from Github API
 - [x] Dynamic Themes (changes CSS theme on demand through UI option) using native CSS variables
@@ -19,9 +19,9 @@ Stack: Typescript, React, GraphQL with Apollo Client and Redux, and Jest for tes
 - [x] Add CI service to run tests (Travis CI)
 - [ ] Use guides for accessibility (WAI-ARIA standard)
 - [ ] Use animations, page transitions, and elements
-- [ ] Almacene la configuración del usuario en localStorage (para mantener la configuración incluso si la página se actualiza)
+- [ ] Store user settings on localStorage (to keep the settings even if the page refreshes)
 
-### Main future improvements
+#### Main future improvements
 
 - [ ] Add a significant amount of tests and improve the quality of existing tests (for now, only tests components mount with react-dom, react-router, and Jest)
 - [ ] Move all user settings to Redux store (lang, themes)
