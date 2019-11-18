@@ -2,31 +2,72 @@
 
 # Github search, modern web app
 
-### Challenge: create an app that allows making searches using the Github API, collect and display data from users and show info with links to their repositories.
+This small application allows searches using the Github v4 API (GraphQL), displays the user information and his repositories.
 
-Stack: Typescript, React, GraphQL and Redux. Tests are made with Jest and Istambul for code coverage
+Stack: Typescript, React, GraphQL with Apollo Client and Redux, and Jest for tests.
 
 :white_check_mark: Live version: [github-search-react.netlify.com](https://github-search-react.netlify.com)
 
-### Bonnus
+### Roadmap:
 
-New features:
+- [x] Display search UI and results page with data fetched from Github API
+- [x] Dynamic Themes (changes CSS theme on demand through UI option) using native CSS variables
+- [x] Multilingual support (EN | BR | ES)
+- [x] Fully responsive, without frameworks (using native flexbox CSS)
+- [x] Use guides for accessibility (WAI-ARIA standard)
+- [x] [Progresive web app](https://developers.google.com/web/progressive-web-apps)
+- [ ] Use animations, page transitions, and elements
+- [ ] Store user settings on localStorage
 
-This project adds some features to the original requirement:
+### Main Future improvements
 
-- Dynamic Themes (change css theme on demand through UI option) using native css variables
-- Add animations, page transitions and elements
-- Multilingual support (EN | BR | ES)
-- Fully responsive, without frameworks (using native flexbox css)
-- Apply guides for accesibility (WAI-ARIA standard)
-- [Progresive web app](https://developers.google.com/web/progressive-web-apps)
-- Persist settings on localStorage
+- [ ] Move all user settings to Redux store (lang, themes)
+- [ ] Use styled-components themes instead of native CSS variables
 
 Good practices
 
 - Use Eslint (code linter with support for Typescript)
 - Prettier (code formatting) with a Pre-Commit hook (git)
 - [Semantic Commit Messages](https://www.conventionalcommits.org/en/v1.0.0/)
+
+## Installation
+
+Create `.env` file with your Github Token, this token is required by Github GraphQL API. (more information about token [here](https://help.github.com/es/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line))
+
+```
+REACT_APP_GITUHB_API_TOKEN=___YOUR_TOKEN_HERE___
+```
+
+After that, in the project directory, run:
+
+### `npm install`
+
+this command will install all needed project dependencies
+
+## Available commands (after installation)
+
+In the project directory, you can run:
+
+### `npm start`
+
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.<br>
+You will also see any lint errors in the console.
+
+### `npm test`
+
+Launches the test runner in the interactive watch mode.<br>
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.<br>
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.<br>
+Your app is ready to be deployed!
 
 ## Project structure
 
@@ -64,51 +105,31 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Each component folder contains a directory called `__tests__` where test files are located with .test.tsx suffix.
 
-## Installation
+## Architecture
 
-Add `.env` file with your Github Token
+Because the control of the local state in apollo client is still incipient, and when projects grow too much it becomes complex to manage the state of the application, this proposal includes the use of a redux store for internal state management, using all the advantages that this implies.
+
+On the other hand using the advantages of GraphQL and the cache of apollo client in each query.
 
 ```
-REACT_APP_GITUHB_API_TOKEN=___YOUR_TOKEN_HERE___
+  +---------------------+
+  |     Apollo Client   |
+  | +-----------------+ |
+  | |                 | |
+  | |      Redux      | |
+  | |                 | |
+  | +-----------------+ |
+  |                     |
+  +---------------------+
+
 ```
-
-After that, in the project directory, run:
-
-### `npm install`
-
-this command will install all needed project dependencies
-
-## Available commands (after installation)
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
 
 ## Conventions
 
-    - Semantic Commit Messages
-    - Semantic versioning
-    - Gitflow, as a git strategy
-    - Changelog [Standard Version]
+- Semantic Commit Messages
+- Semantic versioning
+- Gitflow, as a git strategy
+- Changelog [Standard Version]
 
 # Changelog
 
