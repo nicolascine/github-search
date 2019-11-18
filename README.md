@@ -188,6 +188,16 @@ With this approach, you can use [redux devs tools](https://chrome.google.com/web
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/nicolascine/github-search/compare/v1.1.3...v1.3.0) (2019-11-18)
+
+### Features
+
+- update manifiest.json ([0bb0995](https://github.com/nicolascine/github-search/commit/0bb099529dfc157867087271584cf9df6834225f))
+
+### Bug Fixes
+
+- update translation [ES](<[0a34d5c](https://github.com/nicolascine/github-search/commit/0a34d5c1774de2c5d92ac1c7124d318a4d7de084)>)
+
 ## [1.2.0](https://github.com/nicolascine/github-search/compare/v1.1.2...v1.2.0) (2019-11-17)
 
 ### Features
