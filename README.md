@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/nicolascine/github-search.svg?branch=master)](https://travis-ci.com/nicolascine/github-search)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/077542c3-a8f4-4f19-b252-ba98df7b643f/deploy-status)](https://app.netlify.com/sites/github-search-react/deploys)
 
 # Github search, modern web app
@@ -14,15 +15,18 @@ Stack: Typescript, React, GraphQL with Apollo Client and Redux, and Jest for tes
 - [x] Dynamic Themes (changes CSS theme on demand through UI option) using native CSS variables
 - [x] Multilingual support (EN | BR | ES)
 - [x] Fully responsive, without frameworks (using native flexbox CSS)
-- [x] Use guides for accessibility (WAI-ARIA standard)
 - [x] [Progresive web app](https://developers.google.com/web/progressive-web-apps)
+- [x] Add CI service to run tests (Travis CI)
+- [ ] Use guides for accessibility (WAI-ARIA standard)
 - [ ] Use animations, page transitions, and elements
-- [ ] Store user settings on localStorage
+- [ ] Almacene la configuración del usuario en localStorage (para mantener la configuración incluso si la página se actualiza)
 
-### Main Future improvements
+### Main future improvements
 
+- [ ] Add a significant amount of tests and improve the quality of existing tests (for now, only tests components mount with react-dom, react-router, and Jest)
 - [ ] Move all user settings to Redux store (lang, themes)
 - [ ] Use styled-components themes instead of native CSS variables
+- [ ] Write a Docker file to deploy in own servers (no netlify-like integrations)
 
 Good practices
 
@@ -105,6 +109,51 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Each component folder contains a directory called `__tests__` where test files are located with .test.tsx suffix.
 
+## GraphQL approach
+
+One of the main advantages of using GraphQL is the declarative way in how we write the queries to the server, for this example application, the query groups the user information and its repositories using the username, type and order parameters as variables (example: direction DESC on stars) (located on: `src/pages/results/github-user.graphql`)
+
+```graphql
+query SearchReposByUser(
+  $login: String!
+  $queryString: String!
+  $pageSize: Int!
+) {
+  search(query: $queryString, type: REPOSITORY, first: $pageSize) {
+    edges {
+      node {
+        ... on Repository {
+          name
+          description
+          url
+          stargazers(orderBy: { field: STARRED_AT, direction: DESC }) {
+            totalCount
+          }
+        }
+      }
+    }
+  }
+  user(login: $login) {
+    name
+    login
+    organization(login: $login) {
+      name
+    }
+    avatarUrl
+    location
+    starredRepositories {
+      totalCount
+    }
+    repositories {
+      totalCount
+    }
+    followers {
+      totalCount
+    }
+  }
+}
+```
+
 ## Architecture
 
 Because the control of the local state in apollo client is still incipient, and when projects grow too much it becomes complex to manage the state of the application, this proposal includes the use of a redux store for internal state management, using all the advantages that this implies.
@@ -124,9 +173,9 @@ On the other hand using the advantages of GraphQL and the cache of apollo client
 
 ```
 
-![alt text](https://raw.githubusercontent.com/nicolascine/github-search/master/public/local_state_with_redux_devs_tools.png)
+With this approach, you can use [redux devs tools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) to interact with the application state, in this example, we see the user info and results as a graph.
 
-With this approach, you can use redux devs tools to interact with the application state, in this example, we see the user info and results as a graph.
+![alt text](https://raw.githubusercontent.com/nicolascine/github-search/master/public/local_state_with_redux_devs_tools.png)
 
 ## Conventions
 
