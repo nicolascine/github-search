@@ -156,6 +156,10 @@ Because the control of the local state in apollo client is still incipient, and 
 
 On the other hand using the advantages of GraphQL and the cache of apollo client in each query.
 
+This configuration allows passing values from the Apollo store to redux, using a serializing layer that will keep the container component (data handler) agnostic of data fetching by means of a stateless component.
+
+In the future, the challenge will be to keep the Apollo cache updated with the Redux store automatically.
+
 ```
   +---------------------+
   |     Apollo Client   |
