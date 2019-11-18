@@ -61,7 +61,7 @@ const Container = styled.div`
   }
 `
 
-const QueryContainer: React.FC<{
+const QueryComponent: React.FC<{
   queryString: string
   owner: string
   pageSize: number
@@ -102,23 +102,10 @@ const QueryContainer: React.FC<{
   }
 }
 
-const mapStateToProps = (state: ResultsState) => ({
-  results: state.results
-})
-
-const mapDispatchToProps = (dispatch: Dispatch<ResultsActionTypes>) => {
-  return {
-    requestUserInfoAction: (userInfo: UserInfo) => dispatch(requestUserInfo(userInfo)),
-    requestResultsAction: (item: RepoItem[]) => dispatch(requestItems(item))
-  }
-}
-
 const Results: React.FC<RouteComponentProps<{ userName: string }> & {
   requestUserInfoAction: Function
   requestResultsAction: Function
 }> = ({ match, requestUserInfoAction, requestResultsAction }) => {
-  const GITHUB_USER_NAME = match.params.userName
-
   return (
     <>
       <Container>
@@ -129,24 +116,35 @@ const Results: React.FC<RouteComponentProps<{ userName: string }> & {
             </Link>
           </div>
           <div className="column content">
-            <Input defaultValue={GITHUB_USER_NAME} />
+            <Input defaultValue={match.params.userName} />
           </div>
         </div>
       </Container>
 
       <Container>
         <div className="row">
-          <QueryContainer
+          <QueryComponent
             requestUserInfoAction={requestUserInfoAction}
             requestResultsAction={requestResultsAction}
             pageSize={config.DEFAULT_SEARCH_RESULTS_AMOUNT}
-            owner={GITHUB_USER_NAME}
-            queryString={`user:${GITHUB_USER_NAME}`}
+            owner={match.params.userName}
+            queryString={`user:${match.params.userName}`}
           />
         </div>
       </Container>
     </>
   )
+}
+
+const mapStateToProps = (state: ResultsState) => ({
+  results: state.results
+})
+
+const mapDispatchToProps = (dispatch: Dispatch<ResultsActionTypes>) => {
+  return {
+    requestUserInfoAction: (userInfo: UserInfo) => dispatch(requestUserInfo(userInfo)),
+    requestResultsAction: (item: RepoItem[]) => dispatch(requestItems(item))
+  }
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Results))
