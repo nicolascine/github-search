@@ -34,10 +34,11 @@
     "test": "CI=true react-scripts test --env=jsdom",
     "test:coverage": "npm test -- --coverage",
     "eject": "react-scripts eject",
-    "release": "standard-version"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "release": "standard-version",
+    "lint": "eslint --ext .js,.jsx src",
+    "prettier": "prettier --check 'src/**/*.{js, jsx}'",
+    "lint-autofix": "eslint --ext .js,.jsx src --fix",
+    "lint-check": "eslint --print-config . | eslint-config-prettier-check"
   },
   "browserslist": {
     "production": [
@@ -53,6 +54,53 @@
   },
   "devDependencies": {
     "@types/react-redux": "^7.1.5",
+    "eslint-config-prettier": "~4.1.0",
+    "eslint-config-react-app": "~3.0.8",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "husky": "^1.3.1",
+    "prettier": "^1.16.4",
+    "pretty-quick": "^1.11.1",
     "standard-version": "^7.0.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "prettier",
+      "prettier/babel",
+      "prettier/standard",
+      "react-app"
+    ],
+    "plugins": [
+      "babel",
+      "prettier",
+      "standard"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint",
+      "sourceType": "module"
+    },
+    "env": {
+      "es6": true,
+      "node": true,
+      "browser": true
+    },
+    "rules": {
+      "prettier/prettier": "error"
+    }
+  },
+  "prettier": {
+    "printWidth": 100,
+    "useTabs": false,
+    "semi": false,
+    "trailingComma": "none",
+    "bracketSpacing": true,
+    "tabWidth": 2
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
