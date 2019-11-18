@@ -78,7 +78,6 @@ Your app is ready to be deployed!
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), and the main structure is proposed by this boilerplate, also, as a component strategy use "atomic design pattern" where the main goal is divide into differents component as is possible, finding a balance between coupling and cohesion.
 
 ```
-├── App.test.tsx
 ├── App.tsx
 ├── assets
 ├── common
@@ -103,11 +102,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ├── react-app-env.d.ts
 ├── serviceWorker.ts
 └── styles
-    ├── index.scss
-    └── variables.scss
+    └── index.scss
 ```
 
 Each component folder contains a directory called `__tests__` where test files are located with .test.tsx suffix.
+
+Main directories are: `common` with shared components around de app. `pages` that contain two main pages components (home and results), each directory has a components folder with local comps. The main internal configuration is located on `src/config.tsx` where you can see some constants and static configuration. About the styles, the local CSS live in each component, but in the file `styles/index.scss`you can found global CSS variables and html/fonts/global layout styles.
 
 ## GraphQL approach
 
