@@ -1,27 +1,24 @@
-import React from "react";
-import styled from "styled-components";
-import { loader } from "graphql.macro";
-import { Link, RouteComponentProps } from "react-router-dom";
-import { withRouter } from "react-router";
-import { useQuery } from "@apollo/react-hooks";
-import { connect } from "react-redux";
-import { Dispatch } from "redux";
-import {
-  ResultsState,
-  ResultsActionTypes,
-  RepoItem,
-  UserInfo
-} from "./store/types";
-import { requestUserInfo, requestItems } from "./store/actions";
-import { Logo, Input, Loading } from "../../common";
-import config from "../../config";
-import { NotFound, ResultList, EmptyResults } from "./components";
+import React from "react"
+import styled from "styled-components"
+import { loader } from "graphql.macro"
+import { Link, RouteComponentProps } from "react-router-dom"
+import { withRouter } from "react-router"
+import { useQuery } from "@apollo/react-hooks"
+import { connect } from "react-redux"
+import { Dispatch } from "redux"
+import { ResultsState, ResultsActionTypes, RepoItem, UserInfo } from "./store/types"
+import { requestUserInfo, requestItems } from "./store/actions"
+import { Logo, Input, Loading } from "../../common"
+import config from "../../config"
+import { NotFound, ResultList, EmptyResults } from "./components"
+import ResultSerializer from "./serializer"
 
-const USER_DATA = loader("./github-user.graphql");
+const reasultsFactory = new ResultSerializer()
+const USER_DATA = loader("./github-user.graphql")
 
 const LoadingResultContainer = styled.div`
   margin: 3em auto 0 auto;
-`;
+`
 
 const Container = styled.div`
   display: flex;
@@ -62,59 +59,36 @@ const Container = styled.div`
       }
     }
   }
-`;
+`
 
 const QueryContainer: React.FC<{
-  queryString: string;
-  owner: string;
-  pageSize: number;
-  requestUserInfoAction: Function;
-  requestResultsAction: Function;
-}> = ({
-  queryString,
-  owner,
-  pageSize,
-  requestUserInfoAction,
-  requestResultsAction
-}) => {
+  queryString: string
+  owner: string
+  pageSize: number
+  requestUserInfoAction: Function
+  requestResultsAction: Function
+}> = ({ queryString, owner, pageSize, requestUserInfoAction, requestResultsAction }) => {
   const { loading, error, data } = useQuery(USER_DATA, {
     variables: { queryString, login: owner, pageSize },
     onCompleted: data => {
-      const array: any = [];
+      const edges = reasultsFactory.edges(data.search.edges)
+      const user = reasultsFactory.user(data.user)
 
-      data.search.edges.map((item: any) => {
-        array.push({
-          description: item.node.description,
-          title: item.node.name,
-          starCount: item.node.stargazers.totalCount,
-          link: item.node.url
-        });
-      });
-
-      requestUserInfoAction({
-        userName: data.user.name,
-        userLogin: data.user.login,
-        avatarUrl: data.user.avatarUrl,
-        organization: data.user.organization,
-        location: data.user.location,
-        star: data.user.starredRepositories.totalCount,
-        repo: data.user.repositories.totalCount,
-        followers: data.user.followers.totalCount
-      });
-      requestResultsAction(array);
+      requestUserInfoAction(user)
+      requestResultsAction(edges)
     }
-  });
+  })
 
   if (loading)
     return (
       <LoadingResultContainer>
         <Loading />
       </LoadingResultContainer>
-    );
-  if (error) return <NotFound />;
+    )
+  if (error) return <NotFound />
 
   if (!data.search.edges || !data.user) {
-    return <p>Error :( </p>;
+    return <p>Error :( </p>
   } else {
     return (
       <>
@@ -124,29 +98,26 @@ const QueryContainer: React.FC<{
           <ResultList />
         )}
       </>
-    );
+    )
   }
-};
+}
 
 const mapStateToProps = (state: ResultsState) => ({
   results: state.results
-});
+})
 
 const mapDispatchToProps = (dispatch: Dispatch<ResultsActionTypes>) => {
   return {
-    requestUserInfoAction: (userInfo: UserInfo) =>
-      dispatch(requestUserInfo(userInfo)),
+    requestUserInfoAction: (userInfo: UserInfo) => dispatch(requestUserInfo(userInfo)),
     requestResultsAction: (item: RepoItem[]) => dispatch(requestItems(item))
-  };
-};
-
-const Results: React.FC<
-  RouteComponentProps<{ userName: string }> & {
-    requestUserInfoAction: Function;
-    requestResultsAction: Function;
   }
-> = ({ match, requestUserInfoAction, requestResultsAction }) => {
-  const GITHUB_USER_NAME = match.params.userName;
+}
+
+const Results: React.FC<RouteComponentProps<{ userName: string }> & {
+  requestUserInfoAction: Function
+  requestResultsAction: Function
+}> = ({ match, requestUserInfoAction, requestResultsAction }) => {
+  const GITHUB_USER_NAME = match.params.userName
 
   return (
     <>
@@ -175,12 +146,7 @@ const Results: React.FC<
         </div>
       </Container>
     </>
-  );
-};
+  )
+}
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Results)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Results))
