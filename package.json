@@ -17,7 +17,7 @@
     "graphql.macro": "^1.4.2",
     "i18next": "^19.0.0",
     "i18next-xhr-backend": "^3.2.2",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-i18next": "^11.1.0",
